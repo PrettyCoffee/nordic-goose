@@ -6,9 +6,8 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "tsc && vite dev",
-    "dev:chrome": "tsc && TARGET=chrome vite dev",
     "build": "tsc && vite build",
-    "build:chrome": "tsc && TARGET=chrome vite build",
+    "start": "npm run build -- --watch",
     "validate": "web-ext lint -s dist",
     "sign": "node scripts/sign.js",
     "lint": "eslint . --ignore-path .gitignore",
