@@ -1,0 +1,21 @@
+{
+  "name": "nordic-goose",
+  "displayName": "Nordic goose",
+  "description": "Browser startpage with nord colors and a dancing goose.",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "tsc && vite dev",
+    "dev:chrome": "tsc && TARGET=chrome vite dev",
+    "build": "tsc && vite build",
+    "build:chrome": "tsc && TARGET=chrome vite build",
+    "validate": "web-ext lint -s dist",
+    "sign": "node scripts/sign.js"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.2",
+    "typescript": "^4.4.4",
+    "vite": "^2.7.9",
+    "vite-plugin-web-extension": "^1.4.4"
+  }
+}
