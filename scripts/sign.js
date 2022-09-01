@@ -1,13 +1,10 @@
-require('dotenv').config()
-const { execSync } = require('child_process')
+require("dotenv").config()
+const { execSync } = require("child_process")
 
-const run = (command) =>
-  execSync(`npx ${command}`, {stdio: 'inherit'})
+const run = command => execSync(`npx ${command}`, { stdio: "inherit" })
 
-const parseArgs = (args) =>
-  Object.keys(args).reduce(
-    (result, arg) => `${result} ${arg} ${args[arg]}`
-  , "")
+const parseArgs = args =>
+  Object.keys(args).reduce((result, arg) => `${result} ${arg} ${args[arg]}`, "")
 
 const args = {
   "-s": "dist",

@@ -2,10 +2,24 @@
  * Search function
  */
 
-const searchInput: HTMLInputElement | null = document.querySelector("#searchbar > input")
-const searchButton: HTMLButtonElement | null = document.querySelector("#searchbar > button")
+const searchInput: HTMLInputElement | null =
+  document.querySelector("#searchbar > input")
+const searchButton: HTMLButtonElement | null = document.querySelector(
+  "#searchbar > button"
+)
 
-const lookup: Record<string, string> = { "/": "/", "deepl": "https://deepl.com/", "reddit": "https://reddit.com/", "maps": "https://maps.google.com/", "ados": "https://ados.ptvag.ptv.de/ptv/ptv-technology/_git/curie-components", "sprint": "https://ados.ptvag.ptv.de/ptv/ptv-technology/_sprints/directory", "github": "https://github.com", "localhost": "https://localhost:3000", "nas": "https://prettycoffee.de3.quickconnect.to/", "emoji": "https://getemoji.com/" }
+const lookup: Record<string, string> = {
+  "/": "/",
+  deepl: "https://deepl.com/",
+  reddit: "https://reddit.com/",
+  maps: "https://maps.google.com/",
+  ados: "https://ados.ptvag.ptv.de/ptv/ptv-technology/_git/curie-components",
+  sprint: "https://ados.ptvag.ptv.de/ptv/ptv-technology/_sprints/directory",
+  github: "https://github.com",
+  localhost: "https://localhost:3000",
+  nas: "https://prettycoffee.de3.quickconnect.to/",
+  emoji: "https://getemoji.com/",
+}
 const engine = "duckduckgo"
 const engineUrls = {
   deepl: "https://www.deepl.com/translator#-/-/",
@@ -41,7 +55,7 @@ searchInput?.addEventListener(
   "keyup",
   event => event.key === "Enter" && search()
 )
-searchInput?.addEventListener("click", search)
+searchButton?.addEventListener("click", search)
 
 /**
  * inject bookmarks into html
@@ -58,73 +72,73 @@ type BookmarkGroup = {
 
 const bookmarks: BookmarkGroup[] = [
   {
-    "label": "reddit",
-    "bookmarks": [
+    label: "reddit",
+    bookmarks: [
       {
-        "label": "r/startpages",
-        "url": "https://www.reddit.com/r/startpages/"
+        label: "r/startpages",
+        url: "https://www.reddit.com/r/startpages/",
       },
       {
-        "label": "r/unixporn",
-        "url": "https://www.reddit.com/r/unixporn/"
+        label: "r/unixporn",
+        url: "https://www.reddit.com/r/unixporn/",
       },
       {
-        "label": "r/web_design",
-        "url": "https://www.reddit.com/r/web_design/"
-      }
-    ]
+        label: "r/web_design",
+        url: "https://www.reddit.com/r/web_design/",
+      },
+    ],
   },
   {
-    "label": "design tools",
-    "bookmarks": [
+    label: "design tools",
+    bookmarks: [
       {
-        "label": "pixlrx",
-        "url": "https://pixlr.com/x/"
+        label: "pixlrx",
+        url: "https://pixlr.com/x/",
       },
       {
-        "label": "image enlarger",
-        "url": "https://bigjpg.com/en"
+        label: "image enlarger",
+        url: "https://bigjpg.com/en",
       },
       {
-        "label": "haikei",
-        "url": "https://app.haikei.app/"
+        label: "haikei",
+        url: "https://app.haikei.app/",
       },
       {
-        "label": "css gradients",
-        "url": "https://larsenwork.com/easing-gradients/"
-      }
-    ]
+        label: "css gradients",
+        url: "https://larsenwork.com/easing-gradients/",
+      },
+    ],
   },
   {
-    "label": "worth reading",
-    "bookmarks": [
+    label: "worth reading",
+    bookmarks: [
       {
-        "label": "happy hues",
-        "url": "https://www.happyhues.co/"
+        label: "happy hues",
+        url: "https://www.happyhues.co/",
       },
       {
-        "label": "styled-components",
-        "url": "https://www.joshwcomeau.com/react/demystifying-styled-components/"
+        label: "styled-components",
+        url: "https://www.joshwcomeau.com/react/demystifying-styled-components/",
       },
       {
-        "label": "react docs",
-        "url": "https://reactjs.org/docs/getting-started.html"
-      }
-    ]
+        label: "react docs",
+        url: "https://reactjs.org/docs/getting-started.html",
+      },
+    ],
   },
   {
-    "label": "sources",
-    "bookmarks": [
+    label: "sources",
+    bookmarks: [
       {
-        "label": "icons",
-        "url": "https://feathericons.com/"
+        label: "icons",
+        url: "https://feathericons.com/",
       },
       {
-        "label": "author",
-        "url": "https://prettycoffee.github.io/"
-      }
-    ]
-  }
+        label: "author",
+        url: "https://prettycoffee.github.io/",
+      },
+    ],
+  },
 ]
 
 const createGroupContainer = () => {
@@ -164,7 +178,8 @@ const createGroup = ({ label, bookmarks }: BookmarkGroup) => {
 }
 
 const injectBookmarks = () => {
-  const bookmarksContainer: HTMLElement | null = document.getElementById("bookmarks")
+  const bookmarksContainer: HTMLElement | null =
+    document.getElementById("bookmarks")
   bookmarksContainer?.append()
   bookmarks.map(createGroup).forEach(group => bookmarksContainer?.append(group))
 }

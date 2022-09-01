@@ -1,11 +1,10 @@
-import path from "path";
-import { defineConfig } from "vite";
-import browserExtension from "vite-plugin-web-extension";
+import { defineConfig } from "vite"
+import browserExtension from "vite-plugin-web-extension"
+
 import { getManifest } from "./src/manifest"
+import path from "path"
 
-const root = (...paths: string[]) =>
-  path.resolve(__dirname, ...paths);
-
+const root = (...paths: string[]) => path.resolve(__dirname, ...paths)
 
 export default defineConfig({
   root: "src",
@@ -29,4 +28,4 @@ export default defineConfig({
       browser: process.env.TARGET || "firefox",
     }),
   ],
-});
+})
