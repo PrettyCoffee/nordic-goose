@@ -2,6 +2,8 @@
  * Search function
  */
 
+import { bookmarks } from "./bookmarks"
+
 const searchInput: HTMLInputElement | null =
   document.querySelector("#searchbar > input")
 const searchButton: HTMLButtonElement | null = document.querySelector(
@@ -70,77 +72,6 @@ type BookmarkGroup = {
   bookmarks: Bookmark[]
 }
 
-const bookmarks: BookmarkGroup[] = [
-  {
-    label: "reddit",
-    bookmarks: [
-      {
-        label: "r/startpages",
-        url: "https://www.reddit.com/r/startpages/",
-      },
-      {
-        label: "r/unixporn",
-        url: "https://www.reddit.com/r/unixporn/",
-      },
-      {
-        label: "r/web_design",
-        url: "https://www.reddit.com/r/web_design/",
-      },
-    ],
-  },
-  {
-    label: "design tools",
-    bookmarks: [
-      {
-        label: "pixlrx",
-        url: "https://pixlr.com/x/",
-      },
-      {
-        label: "image enlarger",
-        url: "https://bigjpg.com/en",
-      },
-      {
-        label: "haikei",
-        url: "https://app.haikei.app/",
-      },
-      {
-        label: "css gradients",
-        url: "https://larsenwork.com/easing-gradients/",
-      },
-    ],
-  },
-  {
-    label: "worth reading",
-    bookmarks: [
-      {
-        label: "happy hues",
-        url: "https://www.happyhues.co/",
-      },
-      {
-        label: "styled-components",
-        url: "https://www.joshwcomeau.com/react/demystifying-styled-components/",
-      },
-      {
-        label: "react docs",
-        url: "https://reactjs.org/docs/getting-started.html",
-      },
-    ],
-  },
-  {
-    label: "sources",
-    bookmarks: [
-      {
-        label: "icons",
-        url: "https://feathericons.com/",
-      },
-      {
-        label: "author",
-        url: "https://prettycoffee.github.io/",
-      },
-    ],
-  },
-]
-
 const createGroupContainer = () => {
   const container = document.createElement("div")
   container.className = "bookmark-group"
@@ -177,11 +108,20 @@ const createGroup = ({ label, bookmarks }: BookmarkGroup) => {
   return container
 }
 
-const injectBookmarks = () => {
+const injectBookmarks = (bookmarkGroups: BookmarkGroup[]) => {
   const bookmarksContainer: HTMLElement | null =
     document.getElementById("bookmarks")
-  bookmarksContainer?.append()
-  bookmarks.map(createGroup).forEach(group => bookmarksContainer?.append(group))
+  if (bookmarksContainer) bookmarksContainer.replaceChildren()
+  bookmarkGroups
+    .map(createGroup)
+    .forEach(group => bookmarksContainer?.append(group))
 }
 
-injectBookmarks()
+const inject = () =>
+  bookmarks
+    .read()
+    .then(bookmarks => injectBookmarks(bookmarks as any as BookmarkGroup[]))
+
+inject()
+
+bookmarks.listener(inject).add()

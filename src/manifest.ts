@@ -15,5 +15,5 @@ export const getManifest = () => ({
   chrome_url_overrides: {
     newtab: "index.html",
   },
-  permissions: ["tabs"],
+  permissions: ["tabs", "bookmarks"],
 })
