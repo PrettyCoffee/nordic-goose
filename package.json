@@ -14,6 +14,10 @@
     "lint:fix": "npm run lint -- --fix"
   },
   "dependencies": {
+    "@vanilla-extract/css": "^1.7.3",
+    "@vanilla-extract/recipes": "^0.2.5",
+    "install": "^0.13.0",
+    "npm": "^8.19.1",
     "solid-js": "^1.5.3",
     "webextension-polyfill": "^0.10.0"
   },
@@ -21,6 +25,7 @@
     "@types/webextension-polyfill": "^0.9.0",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
+    "@vanilla-extract/vite-plugin": "^3.3.1",
     "babel-preset-solid": "^1.5.3",
     "dotenv": "^16.0.2",
     "eslint": "^8.23.0",
@@ -37,5 +42,10 @@
     "vite": "^3.0.9",
     "vite-plugin-solid": "^2.3.0",
     "vite-plugin-web-extension": "^1.4.4"
+  },
+  "overrides": {
+    "@vanilla-extract/vite-plugin": {
+      "vite": "^3"
+    }
   }
 }

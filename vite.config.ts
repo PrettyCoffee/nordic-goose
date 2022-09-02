@@ -1,3 +1,4 @@
+import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin"
 import { defineConfig } from "vite"
 import solid from "vite-plugin-solid"
 import webExt from "vite-plugin-web-extension"
@@ -16,6 +17,7 @@ export default defineConfig({
     target: "esnext",
   },
   plugins: [
+    vanillaExtractPlugin({ identifiers: "debug" }),
     solid(),
     webExt({
       manifest: getManifest,
