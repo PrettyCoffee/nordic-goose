@@ -1,11 +1,13 @@
-import { createSignal } from "solid-js"
+import { createSignal, For } from "solid-js"
 
 import { Bookmarks } from "./Bookmarks"
 import { IconButton, Search, TextInput } from "./components"
 import { search } from "./search"
+import { useStore } from "./store"
 import "./styles.css"
 
 export const App = () => {
+  const store = useStore()
   const [value, setValue] = createSignal("")
 
   const send = () => search(value())
@@ -22,7 +24,18 @@ export const App = () => {
         >
           <IconButton icon={Search} caption="Search" onClick={send} />
         </TextInput>
-
+        <div>
+          <For each={store.path.get()}>
+            {item => (
+              <button
+                onClick={() => store.path.set(item)}
+                style={{ background: "transparent", border: "none" }}
+              >
+                /{item.label}
+              </button>
+            )}
+          </For>
+        </div>
         <Bookmarks />
       </main>
       <img src="assets/duck.gif" alt="" />

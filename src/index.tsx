@@ -2,5 +2,13 @@
 import { render } from "solid-js/web"
 
 import { App } from "./App"
+import { StoreProvider } from "./store/Store"
 
-render(() => <App />, document.getElementById("root") as HTMLElement)
+render(
+  () => (
+    <StoreProvider>
+      <App />
+    </StoreProvider>
+  ),
+  document.getElementById("root") as HTMLElement
+)

@@ -4,11 +4,11 @@ export interface BookmarkNode {
   id: string
   label: string
   url?: string
-  bookmarks?: BookmarkNode[]
+  nodes?: BookmarkNode[]
 }
 
 const appendBookmark = (collection: BookmarkNode[], bookmark?: BookmarkNode) =>
-  bookmark?.bookmarks?.length || bookmark?.url
+  bookmark?.nodes?.length || bookmark?.url
     ? [...collection, bookmark]
     : collection
 
@@ -23,7 +23,7 @@ const extractInfos = ({
   return {
     id,
     label: title,
-    ...(bookmarks ? { bookmarks } : { url }),
+    ...(bookmarks ? { nodes: bookmarks } : { url }),
   }
 }
 
@@ -40,10 +40,10 @@ const rename: Record<string, string> = {
 }
 
 const improveRootNodes = (bookmarks: (BookmarkNode | undefined)[]) => {
-  const root = bookmarks[0]?.bookmarks || []
+  const root = bookmarks[0]?.nodes || []
 
   return root.reduce((result, group) => {
-    if (!group.bookmarks?.length) return result
+    if (!group.nodes?.length) return result
     group.label = rename[group.id] || group.label
     return [...result, group]
   }, [] as BookmarkNode[])

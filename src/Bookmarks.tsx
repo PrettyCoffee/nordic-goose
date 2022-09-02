@@ -1,38 +1,75 @@
 import "./Bookmarks.styles.css"
-import { createSignal, For } from "solid-js"
 
-import { BookmarkNode, bookmarks } from "./bookmarks/index"
-import { Link } from "./components"
+import { Bookmark, Folder, Link } from "./components"
+import { useStore } from "./store"
+import { BookmarkNode } from "./store/bookmarks"
 
-const BookmarkGroup = (props: { group: BookmarkNode }) => (
+const itemStyles = {
+  display: "inline-flex",
+  "align-items": "center",
+  gap: "4px",
+  cursor: "pointer",
+}
+
+interface NodeProp {
+  node: BookmarkNode
+}
+
+const BookmarkLink = (props: NodeProp) => (
+  <Link href={props.node.url}>
+    <span style={itemStyles}>
+      <Bookmark size={14} />
+      {props.node.label}
+    </span>
+  </Link>
+)
+
+const GroupButton = (props: NodeProp) => {
+  const store = useStore()
+
+  const setAsGroup = () => store.path.set(props.node)
+
+  return (
+    <h2>
+      <button
+        onClick={setAsGroup}
+        style={{
+          padding: 0,
+          background: "transparent",
+          border: "none",
+          ...itemStyles,
+        }}
+      >
+        <Folder size={14} />
+        {props.node.label}
+      </button>
+    </h2>
+  )
+}
+
+const sortNodes = (nodes?: BookmarkNode[]) =>
+  nodes?.sort((a, b) => {
+    if (a.nodes && !b.nodes) return -1
+    if (!a.nodes && b.nodes) return 1
+    return a.label.toLowerCase() < b.label.toLowerCase() ? -1 : 1
+  })
+
+const BookmarkGroup = (props: NodeProp) => (
   <>
-    <h2>{props.group.label}</h2>
-    {props.group.bookmarks?.map(node =>
-      node.bookmarks ? (
-        <BookmarkGroup group={node} />
-      ) : (
-        <Link href={node.url}>{node.label}</Link>
-      )
+    {sortNodes(props.node.nodes)?.map(node =>
+      node.nodes ? <GroupButton node={node} /> : <BookmarkLink node={node} />
     )}
   </>
 )
 
 export const Bookmarks = () => {
-  const [groups, setGroups] = createSignal<BookmarkNode[]>([])
-
-  const updateGroups = () => bookmarks.read().then(setGroups)
-  updateGroups()
-  bookmarks.listener(updateGroups).add()
-
+  const store = useStore()
   return (
     <div class="bookmark-group">
-      <For each={groups()}>
-        {group => (
-          <>
-            <BookmarkGroup group={group} />
-          </>
-        )}
-      </For>
+      {() => {
+        const value = store.path.value()
+        return value ? <BookmarkGroup node={value} /> : <></>
+      }}
     </div>
   )
 }
