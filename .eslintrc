@@ -11,12 +11,14 @@
   },
   "extends": [
     "eslint:recommended",
+    "plugin:solid/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:import/recommended",
     "plugin:import/typescript",
+    "plugin:jsx-a11y/recommended",
     "plugin:prettier/recommended"
   ],
-  "plugins": ["@typescript-eslint", "import", "unused-imports"],
+  "plugins": ["solid","@typescript-eslint", "import", "unused-imports","jsx-a11y"],
   "rules": {
     "import/order": [
       "error",
@@ -46,7 +48,8 @@
 
     "unused-imports/no-unused-imports": "error",
     "@typescript-eslint/no-use-before-define": ["error"],
-    "no-case-declarations": "off"
+    "jsx-a11y/no-onchange": "off" // deprecated rule, will be deleted in a future release
+
   },
   "settings": {
     "jest": { "version": 27 }, // fixes error where jest is needed

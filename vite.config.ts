@@ -1,5 +1,6 @@
 import { defineConfig } from "vite"
-import browserExtension from "vite-plugin-web-extension"
+import solid from "vite-plugin-solid"
+import webExt from "vite-plugin-web-extension"
 
 import { getManifest } from "./src/manifest"
 import path from "path"
@@ -12,9 +13,11 @@ export default defineConfig({
   build: {
     outDir: root("dist"),
     emptyOutDir: true,
+    target: "esnext",
   },
   plugins: [
-    browserExtension({
+    solid(),
+    webExt({
       manifest: getManifest,
       assets: "assets",
       additionalInputs: [

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    // web ext preset
     "types": ["vite/client"],
     "target": "ESNext",
     "module": "ESNext",
@@ -12,10 +13,15 @@
     "noEmit": true,
     "skipLibCheck": true,
 
+    // mine
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    //"isolatedModules": true
+    "isolatedModules": true,
+
+    // jsx
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js"
   }
 }

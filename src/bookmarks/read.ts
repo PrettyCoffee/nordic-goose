@@ -7,16 +7,25 @@ export interface BookmarkNode {
   bookmarks?: BookmarkNode[]
 }
 
+const appendBookmark = (collection: BookmarkNode[], bookmark?: BookmarkNode) =>
+  bookmark?.bookmarks?.length || bookmark?.url
+    ? [...collection, bookmark]
+    : collection
+
 const extractInfos = ({
   id,
   title,
   children,
   url,
-}: Bookmarks.BookmarkTreeNode): BookmarkNode => ({
-  id,
-  label: title,
-  ...(children ? { bookmarks: children?.map(extractInfos) } : { url }),
-})
+}: Bookmarks.BookmarkTreeNode): BookmarkNode | undefined => {
+  const bookmarks = children?.map(extractInfos).reduce(appendBookmark, [])
+  if (!bookmarks?.length && !url) return undefined
+  return {
+    id,
+    label: title,
+    ...(bookmarks ? { bookmarks } : { url }),
+  }
+}
 
 const rename: Record<string, string> = {
   // firefox
@@ -30,8 +39,9 @@ const rename: Record<string, string> = {
   "2": "others",
 }
 
-const improveRootNodes = (bookmarks: BookmarkNode[]) => {
-  const root = bookmarks[0].bookmarks || []
+const improveRootNodes = (bookmarks: (BookmarkNode | undefined)[]) => {
+  const root = bookmarks[0]?.bookmarks || []
+
   return root.reduce((result, group) => {
     if (!group.bookmarks?.length) return result
     group.label = rename[group.id] || group.label
