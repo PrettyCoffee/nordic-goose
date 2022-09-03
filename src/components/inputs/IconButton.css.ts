@@ -2,33 +2,6 @@ import { recipe } from "@vanilla-extract/recipes"
 
 import { theme } from "../../theme"
 
-/*
-.icon-button {
-  width: calc(var(--space-medium) * 2);
-  height: calc(var(--space-medium) * 2);
-  color: var(--color-primary-fg);
-
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-  outline: none;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.icon-button:hover {
-  color: var(--color-primary-base);
-}
-
-.icon-button:focus-visible {
-  color: var(--color-primary-base);
-  background: var(--color-bg-highlight);
-  outline: var(--space-smallest) solid var(--color-text);
-}
-*/
-
 export const iconbutton = recipe({
   base: {
     vars: {
@@ -73,7 +46,7 @@ export const iconbutton = recipe({
         backgroundColor: theme.tokens.bg.hover,
       },
       "&:active::before": {
-        backgroundColor: theme.tokens.bg.active,
+        backgroundColor: theme.tokens.bg.primary,
       },
     },
   },
