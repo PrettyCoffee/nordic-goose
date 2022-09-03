@@ -1,4 +1,4 @@
-export type { FeatherIcon, IconBaseProps } from "./Icon"
+export type { FeatherIcon, IconBaseProps } from "./_IconBase"
 
 export { Bookmark } from "./Bookmark"
 export { Folder } from "./Folder"

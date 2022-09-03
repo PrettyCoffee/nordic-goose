@@ -14,7 +14,7 @@ const sizes: Record<IconSize, number> = {
 const getIconSize = (size?: IconSize | number) =>
   typeof size === "number" ? size : sizes[size || "md"]
 
-interface IconProps extends Pick<IconBaseProps, "color" | "className"> {
+interface IconProps extends Pick<IconBaseProps, "color" | "class"> {
   icon: FeatherIcon
   size?: IconSize | number
 }
