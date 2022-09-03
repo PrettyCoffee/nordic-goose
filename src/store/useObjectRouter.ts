@@ -39,11 +39,6 @@ export interface ObjectRouterResult {
 export const useObjectRouter = (args: ObjectRouterArgs): ObjectRouterResult => {
   const [current, setCurrent] = createSignal<PathNode | null>(null)
 
-  createEffect(() => {
-    const home = args.homeId() || "toolbar_____"
-    setCurrent(findNodeById(args.nodes(), home))
-  })
-
   const path = createMemo(() => {
     const node = current()
     return !node?.id ? [] : getPathOfNode(args.nodes(), node.id)
@@ -52,6 +47,12 @@ export const useObjectRouter = (args: ObjectRouterArgs): ObjectRouterResult => {
   const set = (node: PathNode | null) => {
     setCurrent(() => node || { id: "root", label: "", nodes: args.nodes() })
   }
+
+  createEffect(() => {
+    const homeId = args.homeId()
+    const home = !homeId ? null : findNodeById(args.nodes(), homeId)
+    set(home)
+  })
 
   return {
     value: current,

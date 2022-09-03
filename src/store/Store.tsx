@@ -5,10 +5,16 @@ import {
   ParentProps,
   useContext,
 } from "solid-js"
+import browser from "webextension-polyfill"
 
 import { BookmarkNode } from "./bookmarks"
 import { useBookmarks } from "./useBookmarks"
 import { ObjectRouterResult, useObjectRouter } from "./useObjectRouter"
+
+const browserInfo = browser?.runtime?.getBrowserInfo
+const isFirefox = browserInfo && (await browserInfo()).name === "Firefox"
+
+const toolbarId = isFirefox ? "toolbar_____" : "1"
 
 interface ContextState {
   path: ObjectRouterResult
@@ -27,7 +33,7 @@ const Context = createContext<ContextState>({
 })
 
 export const StoreProvider = (props: ParentProps) => {
-  const [homeId, setHomeId] = createSignal<string | null>(null)
+  const [homeId, setHomeId] = createSignal<string | null>(toolbarId)
   const bookmarks = useBookmarks()
   const path = useObjectRouter({ nodes: bookmarks, homeId })
 
