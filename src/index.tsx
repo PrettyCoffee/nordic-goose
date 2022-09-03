@@ -3,11 +3,14 @@ import { render } from "solid-js/web"
 
 import { App } from "./App"
 import { StoreProvider } from "./store/Store"
+import { ThemeProvider } from "./theme"
 
 render(
   () => (
     <StoreProvider>
-      <App />
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
     </StoreProvider>
   ),
   document.getElementById("root") as HTMLElement
