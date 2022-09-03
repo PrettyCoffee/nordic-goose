@@ -1,6 +1,7 @@
 .text-input {
   display: flex;
   align-items: center;
+  gap: 4px;
 }
 
 .text-input>input {
