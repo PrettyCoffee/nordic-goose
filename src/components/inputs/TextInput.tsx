@@ -1,6 +1,6 @@
 import { ParentProps, splitProps } from "solid-js"
 
-import "./TextInput.styles.css"
+import { input, layout } from "./TextInput.css"
 
 export interface TextInputProps extends ParentProps {
   placeholder?: string
@@ -15,10 +15,11 @@ export const TextInput = (props: TextInputProps) => {
     "onKeyDown",
   ])
   return (
-    <div class="text-input">
+    <div class={layout()}>
       {props.children}
       <input
         type="text"
+        class={input()}
         onInput={e => onChange?.(e.currentTarget.value)}
         onKeyDown={e => onKeyDown?.(e.key)}
         {...delegated}
