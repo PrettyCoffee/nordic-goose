@@ -1,7 +1,7 @@
 import { calc } from "@vanilla-extract/css-utils"
 import { recipe } from "@vanilla-extract/recipes"
 
-import { theme } from "./theme"
+import { theme } from "../theme"
 
 const bookmarkHeight = calc.multiply(theme.space.md, 1.5)
 
