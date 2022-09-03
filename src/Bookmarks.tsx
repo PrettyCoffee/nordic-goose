@@ -1,15 +1,8 @@
-import "./Bookmarks.styles.css"
-
-import { Bookmark, Folder, Link } from "./components"
+import { bookmarks } from "./Bookmarks.css"
+import { Bookmark, Folder, Link, LinkButton } from "./components"
+import { Icon } from "./components/primitives/Icon"
 import { useStore } from "./store"
 import { BookmarkNode } from "./store/bookmarks"
-
-const itemStyles = {
-  display: "inline-flex",
-  "align-items": "center",
-  gap: "4px",
-  cursor: "pointer",
-}
 
 interface NodeProp {
   node: BookmarkNode
@@ -17,10 +10,8 @@ interface NodeProp {
 
 const BookmarkLink = (props: NodeProp) => (
   <Link href={props.node.url}>
-    <span style={itemStyles}>
-      <Bookmark size={14} />
-      {props.node.label}
-    </span>
+    <Icon icon={Bookmark} size="md" />
+    {props.node.label}
   </Link>
 )
 
@@ -30,20 +21,10 @@ const GroupButton = (props: NodeProp) => {
   const setAsGroup = () => store.path.set(props.node)
 
   return (
-    <h2>
-      <button
-        onClick={setAsGroup}
-        style={{
-          padding: 0,
-          background: "transparent",
-          border: "none",
-          ...itemStyles,
-        }}
-      >
-        <Folder size={14} />
-        {props.node.label}
-      </button>
-    </h2>
+    <LinkButton onClick={setAsGroup} highlighted>
+      <Icon icon={Folder} size="md" />
+      {props.node.label}
+    </LinkButton>
   )
 }
 
@@ -65,7 +46,7 @@ const BookmarkGroup = (props: NodeProp) => (
 export const Bookmarks = () => {
   const store = useStore()
   return (
-    <div class="bookmark-group">
+    <div class={bookmarks()}>
       {() => {
         const value = store.path.value()
         return value ? <BookmarkGroup node={value} /> : <></>
