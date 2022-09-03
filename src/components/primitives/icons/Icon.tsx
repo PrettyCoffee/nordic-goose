@@ -1,14 +1,14 @@
 import { Component, ParentProps, splitProps } from "solid-js"
 
-export interface IconProps {
+export interface IconBaseProps {
   color?: string
   size?: string | number
   className?: string
 }
 
-export type FeatherIcon = Component<IconProps>
+export type FeatherIcon = Component<IconBaseProps>
 
-export const GenericIcon = (props: IconProps & ParentProps) => {
+export const GenericIcon = (props: IconBaseProps & ParentProps) => {
   const [{ color = "currentColor", size = "24" }, rest] = splitProps(props, [
     "color",
     "size",
