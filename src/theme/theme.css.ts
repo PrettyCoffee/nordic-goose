@@ -78,9 +78,9 @@ const getTokens = ({ neutral, primary }: Colors) => ({
   },
   bg: {
     base: neutral[3],
-    surface: neutral[2],
+    surface: neutral[3],
     muted: neutral[4],
-    active: primary[8],
+    primary: primary[8],
 
     input: neutral[4],
     hover: neutral[6],
