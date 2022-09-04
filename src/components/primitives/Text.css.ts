@@ -1,4 +1,4 @@
-import { recipe } from "@vanilla-extract/recipes"
+import { recipe, RecipeVariants } from "@vanilla-extract/recipes"
 
 import { theme } from "../../theme"
 
@@ -25,9 +25,20 @@ export const text = recipe({
         overflowX: "hidden",
       },
     },
+    inherit: {
+      true: {
+        color: "inherit",
+      },
+      false: {
+        color: theme.tokens.fg.base,
+      },
+    },
   },
   defaultVariants: {
     as: "span",
     nowrap: false,
+    inherit: true,
   },
 })
+
+export type TextVariants = RecipeVariants<typeof text>

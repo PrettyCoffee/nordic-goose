@@ -1,21 +1,24 @@
 import { For, ParentProps } from "solid-js"
 
-import { breadcrumb, separator, breadcrumbItem } from "./Breadcrumb.css"
+import { Link } from "../primitives"
+import { breadcrumb, separator } from "./Breadcrumb.css"
 
 const Separator = () => <span class={separator()}>/</span>
 
 interface ButtonProps extends ParentProps {
   onClick: () => void
+  nowrap?: boolean
   highlighted?: boolean
 }
 const BreadcrumbItem = (props: ButtonProps) => (
   <>
-    <button
+    <Link
       onClick={props.onClick}
-      class={breadcrumbItem({ highlighted: props.highlighted })}
+      highlighted={props.highlighted}
+      nowrap={props.nowrap}
     >
       {props.children}
-    </button>
+    </Link>
     <Separator />
   </>
 )
@@ -33,7 +36,7 @@ export const Breadcrumb = <T extends object>(props: BreadcrumbProps<T>) => (
     </BreadcrumbItem>
     <For each={props.path}>
       {item => (
-        <BreadcrumbItem onClick={() => props.onChange(item)}>
+        <BreadcrumbItem onClick={() => props.onChange(item)} nowrap>
           {item[props.labelAccessor] as string}
         </BreadcrumbItem>
       )}

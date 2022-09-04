@@ -1,4 +1,4 @@
-import { recipe } from "@vanilla-extract/recipes"
+import { recipe, RecipeVariants } from "@vanilla-extract/recipes"
 
 import { theme } from "../../theme"
 
@@ -6,7 +6,6 @@ export const link = recipe({
   base: {
     position: "relative",
     padding: "2px 0",
-    width: "100%",
 
     display: "inline-flex",
     alignItems: "center",
@@ -14,10 +13,6 @@ export const link = recipe({
 
     outline: "none",
     cursor: "pointer",
-
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
-    overflow: "hidden",
 
     color: theme.tokens.fg.base,
     selectors: {
@@ -38,9 +33,15 @@ export const link = recipe({
     as: {
       a: {},
       button: {
-        padding: 0,
         background: "transparent",
         border: "none",
+      },
+    },
+    nowrap: {
+      true: {
+        whiteSpace: "nowrap",
+        textOverflow: "ellipsis",
+        overflowX: "hidden",
       },
     },
     highlighted: {
@@ -62,6 +63,9 @@ export const link = recipe({
   },
   defaultVariants: {
     as: "a",
+    nowrap: false,
     highlighted: false,
   },
 })
+
+export type LinkVariants = RecipeVariants<typeof link> & {}

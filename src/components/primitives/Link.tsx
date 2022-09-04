@@ -1,33 +1,49 @@
 import { ParentProps } from "solid-js"
 
-import { link } from "./Link.css"
+import { Icon } from "./Icon"
+import { FeatherIcon } from "./icons"
+import { link, LinkVariants } from "./Link.css"
+import { Text } from "./Text"
 
-interface LinkProps extends ParentProps {
-  href?: string
-  highlighted?: boolean
-}
+const linkFromProps = (as: "a" | "button", args: LinkProps | LinkButtonProps) =>
+  link({
+    as,
+    nowrap: args.nowrap,
+    highlighted: args.highlighted,
+  })
 
-export const Link = (props: LinkProps) => (
-  <a
-    href={props.href}
-    class={link({
-      highlighted: props.highlighted,
-    })}
-  >
-    {props.children}
-  </a>
+const LinkContent = (props: LinkProps | LinkButtonProps) => (
+  <>
+    {props.icon && <Icon icon={props.icon} size="md" />}
+    <Text nowrap={props.nowrap}>{props.children}</Text>
+  </>
 )
 
-interface LinkButtonProps extends ParentProps {
+type LinkProps = ParentProps &
+  Omit<LinkVariants, "as"> & {
+    icon?: FeatherIcon
+    href?: string
+  }
+
+interface LinkButtonProps extends Omit<LinkProps, "href"> {
   onClick?: () => void
-  highlighted?: boolean
 }
 
+export const Link = (props: LinkProps | LinkButtonProps) =>
+  "href" in props ? (
+    <a href={props.href} class={linkFromProps("a", props)}>
+      <LinkContent {...props} />
+    </a>
+  ) : "onClick" in props ? (
+    <button onClick={props.onClick} class={linkFromProps("button", props)}>
+      <LinkContent {...props} />
+    </button>
+  ) : (
+    <LinkContent {...props} />
+  )
+
 export const LinkButton = (props: LinkButtonProps) => (
-  <button
-    onClick={props.onClick}
-    class={link({ as: "button", highlighted: props.highlighted })}
-  >
-    {props.children}
+  <button onClick={props.onClick} class={linkFromProps("button", props)}>
+    <LinkContent {...props} />
   </button>
 )

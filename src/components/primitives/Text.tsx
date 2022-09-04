@@ -1,15 +1,19 @@
 import { ParentProps } from "solid-js"
 
-import { text } from "./Text.css"
+import { text, TextVariants } from "./Text.css"
 
-interface TextProps extends ParentProps {
-  nowrap?: boolean
-}
+type TextProps = Omit<ParentProps & TextVariants, "as">
 
 export const Text = (props: TextProps) => (
-  <h1 class={text({ as: "span", nowrap: props.nowrap })}>{props.children}</h1>
+  <span
+    class={text({ as: "span", nowrap: props.nowrap, inherit: props.inherit })}
+  >
+    {props.children}
+  </span>
 )
 
 export const Headline = (props: TextProps) => (
-  <h1 class={text({ as: "h1", nowrap: props.nowrap })}>{props.children}</h1>
+  <h1 class={text({ as: "h1", nowrap: props.nowrap, inherit: props.inherit })}>
+    {props.children}
+  </h1>
 )

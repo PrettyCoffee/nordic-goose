@@ -1,6 +1,6 @@
 import { Accessor, createMemo } from "solid-js"
 
-import { Bookmark, Folder, Link, LinkButton, Icon } from "../components"
+import { Bookmark, Folder, Link } from "../components"
 import { useStore, BookmarkNode } from "../store"
 import { bookmarks } from "./Bookmarks.css"
 
@@ -9,8 +9,7 @@ interface NodeProp {
 }
 
 const BookmarkLink = (props: NodeProp) => (
-  <Link href={props.node.url}>
-    <Icon icon={Bookmark} size="md" />
+  <Link href={props.node.url} icon={Bookmark} nowrap>
     {props.node.label}
   </Link>
 )
@@ -19,10 +18,9 @@ const GroupButton = (props: NodeProp) => {
   const store = useStore()
   const setAsGroup = () => store.path.set(props.node)
   return (
-    <LinkButton onClick={setAsGroup} highlighted>
-      <Icon icon={Folder} size="md" />
+    <Link onClick={setAsGroup} icon={Folder} nowrap highlighted>
       {props.node.label}
-    </LinkButton>
+    </Link>
   )
 }
 
@@ -50,8 +48,8 @@ interface BookmarksProps {
   filter?: Accessor<string>
 }
 
-/** TODO: Add options for case sensitive search and "in path" search
- * Add toggles "g" and "i" in a square at the end of the search field
+/** TODO: Add options for case sensitive search, "in path" and "in history" search
+ * Add toggles "g", "i", "h" in a square at the end of the search field
  */
 export const Bookmarks = (props: BookmarksProps) => {
   const store = useStore()
