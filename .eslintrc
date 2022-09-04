@@ -48,7 +48,8 @@
 
     "unused-imports/no-unused-imports": "error",
     "@typescript-eslint/no-use-before-define": ["error"],
-    "jsx-a11y/no-onchange": "off" // deprecated rule, will be deleted in a future release
+    "jsx-a11y/no-onchange": "off", // deprecated rule, will be deleted in a future release
+    "solid/reactivity": "off"
 
   },
   "settings": {
