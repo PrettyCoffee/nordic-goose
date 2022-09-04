@@ -49,7 +49,7 @@ const improveRootNodes = (bookmarks: (BookmarkNode | undefined)[]) => {
   }, [] as BookmarkNode[])
 }
 
-export const read = () =>
+export const readBookmarks = () =>
   Browser.bookmarks
     .getTree()
     .then(bookmarks => bookmarks.map(extractInfos))

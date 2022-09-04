@@ -7,7 +7,7 @@ import {
 } from "solid-js"
 import browser from "webextension-polyfill"
 
-import { BookmarkNode } from "./bookmarks"
+import { BookmarkNode } from "../components"
 import { useBookmarks } from "./useBookmarks"
 import { ObjectRouterResult, useObjectRouter } from "./useObjectRouter"
 

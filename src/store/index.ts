@@ -1,2 +1,2 @@
 export { StoreProvider, useStore } from "./Store"
-export type { BookmarkNode } from "./bookmarks"
+export type { BookmarkNode } from "../components/utils/bookmarks"

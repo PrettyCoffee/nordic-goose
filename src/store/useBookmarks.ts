@@ -1,17 +1,18 @@
 import { createSignal, onCleanup } from "solid-js"
 
-import { BookmarkNode, bookmarks } from "./bookmarks"
+import { BookmarkNode, readBookmarks, bookmarksListener } from "../components"
 
-const initialBookmarks = bookmarks.read()
+const initialBookmarks = readBookmarks()
 
 export const useBookmarks = () => {
   const [groups, setGroups] = createSignal<BookmarkNode[]>([])
   initialBookmarks.then(setGroups)
 
-  const updateGroups = () => bookmarks.read().then(setGroups)
-  bookmarks.listener(updateGroups).add()
+  const updateGroups = () => readBookmarks().then(setGroups)
+  const listener = bookmarksListener(updateGroups)
 
-  onCleanup(bookmarks.listener(updateGroups).remove)
+  listener.add()
+  onCleanup(listener.remove)
 
   return groups
 }

@@ -22,7 +22,7 @@ const addListener = (listener: () => void) => {
   Browser.bookmarks.onRemoved.addListener(listener)
 }
 
-export const listener = (listener: () => void) => ({
+export const bookmarksListener = (listener: () => void) => ({
   add: () => addListener(listener),
   remove: () => removeListener(listener),
   isApplied: () => hasListener(listener),
