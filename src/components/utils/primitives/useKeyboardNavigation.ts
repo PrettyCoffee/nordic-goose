@@ -13,7 +13,7 @@ interface Args {
     next: string
     first: string
     last: string
-    //TODO: others: [string, (index: number) => number][]
+    others?: [string, (index: number) => number][]
   }
 }
 
@@ -65,7 +65,7 @@ export const useKeyboardNavigation = ({ ref, selector, keys }: Args) => {
       children().forEach(child => setTabIndex(child, -1))
       /** if focusableElement is not inside ref anymore
        *  We will want to focus index 0
-       */
+       **/
       if (focused != null && !ref()?.contains(focusableElement)) setFocused(0)
     })
   )
@@ -88,11 +88,13 @@ export const useKeyboardNavigation = ({ ref, selector, keys }: Args) => {
       const element = ref()
       setTabIndex(element, 0)
 
-      const navigate = ({ key }: KeyboardEvent) =>
-        changeFocus(key, keys.next, f => f + 1) ||
-        changeFocus(key, keys.prev, f => f - 1) ||
-        changeFocus(key, keys.first, () => 0) ||
+      const navigate = ({ key }: KeyboardEvent) => {
+        changeFocus(key, keys.next, i => i + 1)
+        changeFocus(key, keys.prev, i => i - 1)
+        changeFocus(key, keys.first, () => 0)
         changeFocus(key, keys.last, () => children().length)
+        keys.others?.forEach(([k, cb]) => changeFocus(key, k, cb))
+      }
 
       createEventListener({
         ref: element,

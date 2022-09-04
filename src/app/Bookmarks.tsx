@@ -77,6 +77,10 @@ export const Bookmarks = (props: BookmarksProps) => {
       prev: "ArrowUp",
       first: "Home",
       last: "End",
+      others: [
+        ["ArrowRight", i => i + 4],
+        ["ArrowLeft", i => i - 4],
+      ],
     },
   })
 
