@@ -1,6 +1,7 @@
 import { For, ParentProps } from "solid-js"
 
 import { Link } from "../primitives"
+import { createRef, useKeyboardNavigation } from "../utils"
 import { breadcrumb, separator } from "./Breadcrumb.css"
 
 const Separator = () => <span class={separator()}>/</span>
@@ -29,17 +30,32 @@ interface BreadcrumbProps<T extends object> {
   onChange: (item: T | null) => void
 }
 
-export const Breadcrumb = <T extends object>(props: BreadcrumbProps<T>) => (
-  <div class={breadcrumb()}>
-    <BreadcrumbItem highlighted onClick={() => props.onChange(null)}>
-      ~
-    </BreadcrumbItem>
-    <For each={props.path}>
-      {item => (
-        <BreadcrumbItem onClick={() => props.onChange(item)} nowrap>
-          {item[props.labelAccessor] as string}
-        </BreadcrumbItem>
-      )}
-    </For>
-  </div>
-)
+export const Breadcrumb = <T extends object>(props: BreadcrumbProps<T>) => {
+  const [ref, setRef] = createRef()
+
+  useKeyboardNavigation({
+    ref,
+    selector: "button",
+    keys: {
+      next: "ArrowRight",
+      prev: "ArrowLeft",
+      first: "Home",
+      last: "End",
+    },
+  })
+
+  return (
+    <div ref={setRef} class={breadcrumb()}>
+      <BreadcrumbItem highlighted onClick={() => props.onChange(null)}>
+        ~
+      </BreadcrumbItem>
+      <For each={props.path}>
+        {item => (
+          <BreadcrumbItem onClick={() => props.onChange(item)} nowrap>
+            {item[props.labelAccessor] as string}
+          </BreadcrumbItem>
+        )}
+      </For>
+    </div>
+  )
+}

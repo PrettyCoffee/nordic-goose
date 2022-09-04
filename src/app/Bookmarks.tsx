@@ -1,6 +1,12 @@
 import { Accessor, createMemo } from "solid-js"
 
-import { Bookmark, Folder, Link } from "../components"
+import {
+  Bookmark,
+  Folder,
+  Link,
+  createRef,
+  useKeyboardNavigation,
+} from "../components"
 import { useStore, BookmarkNode } from "../store"
 import { bookmarks } from "./Bookmarks.css"
 
@@ -52,6 +58,7 @@ interface BookmarksProps {
  * Add toggles "g", "i", "h" in a square at the end of the search field
  */
 export const Bookmarks = (props: BookmarksProps) => {
+  const [ref, setRef] = createRef()
   const store = useStore()
 
   const visibleBookmarks = createMemo(() => {
@@ -62,8 +69,19 @@ export const Bookmarks = (props: BookmarksProps) => {
     return filterBookmarks(store.bookmarks(), filter)
   })
 
+  useKeyboardNavigation({
+    ref,
+    selector: "button, a",
+    keys: {
+      next: "ArrowDown",
+      prev: "ArrowUp",
+      first: "Home",
+      last: "End",
+    },
+  })
+
   return (
-    <div class={bookmarks()}>
+    <div ref={setRef} class={bookmarks()}>
       {sortNodes(visibleBookmarks())?.map(node =>
         node.nodes ? <GroupButton node={node} /> : <BookmarkLink node={node} />
       )}

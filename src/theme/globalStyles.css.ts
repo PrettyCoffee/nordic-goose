@@ -54,3 +54,10 @@ globalStyle("a", {
   textDecoration: "none",
   outline: "none",
 })
+
+/* Keyboard focus debugging
+globalStyle("*:focus-visible", {
+  backgroundColor: "red!important",
+  background: "red!important",
+})
+*/
