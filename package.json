@@ -7,9 +7,9 @@
   "scripts": {
     "dev": "tsc && vite dev",
     "build": "tsc && vite build",
-    "start": "npm run build -- --watch",
+    "start": "npm run build -- --watch --minify false",
     "validate": "web-ext lint -s dist",
-    "sign": "node scripts/sign.js",
+    "sign": "npm run build && node scripts/sign.js",
     "lint": "eslint . --ignore-path .gitignore",
     "lint:fix": "npm run lint -- --fix"
   },
