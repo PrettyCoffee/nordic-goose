@@ -24,7 +24,7 @@ const Content = (props: IconButtonProps | IconLinkProps) => (
 
 export const IconButton = (props: IconButtonProps | IconLinkProps) => {
   const commonProps = createMemo(() => ({
-    class: iconbutton(),
+    class: iconbutton,
     title: props.caption,
   }))
   return (

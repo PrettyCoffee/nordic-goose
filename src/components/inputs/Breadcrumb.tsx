@@ -4,7 +4,7 @@ import { Link } from "../primitives"
 import { createRef, useKeyboardNavigation } from "../utils"
 import { breadcrumb, separator } from "./Breadcrumb.css"
 
-const Separator = () => <span class={separator()}>/</span>
+const Separator = () => <span class={separator}>/</span>
 
 interface ButtonProps extends ParentProps {
   onClick: () => void
@@ -46,7 +46,7 @@ export const Breadcrumb = <T extends object>(props: BreadcrumbProps<T>) => {
   })
 
   return (
-    <div ref={setRef} class={breadcrumb()}>
+    <div ref={setRef} class={breadcrumb}>
       <BreadcrumbItem highlighted onClick={() => props.onChange(null)}>
         ~
       </BreadcrumbItem>

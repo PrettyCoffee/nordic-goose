@@ -15,11 +15,11 @@ export const TextInput = (props: TextInputProps) => {
     "onKeyDown",
   ])
   return (
-    <div class={layout()}>
+    <div class={layout}>
       {props.children}
       <input
         type="text"
-        class={input()}
+        class={input}
         onInput={e => onChange?.(e.currentTarget.value)}
         onKeyDown={e => onKeyDown?.(e.key)}
         {...delegated}

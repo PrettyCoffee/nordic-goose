@@ -2,12 +2,10 @@ import { ParentProps } from "solid-js"
 
 import { surface, surfaceContent, surfaceImage } from "./Surface.css"
 
-const SurfaceLayout = (props: ParentProps) => (
-  <div class={surface()} {...props} />
-)
+const SurfaceLayout = (props: ParentProps) => <div class={surface} {...props} />
 
 const SurfaceMain = (props: ParentProps) => (
-  <main class={surfaceContent()} {...props} />
+  <main class={surfaceContent} {...props} />
 )
 
 const SurfaceImage = (props: {
@@ -17,7 +15,7 @@ const SurfaceImage = (props: {
   width?: string
 }) => (
   <img
-    class={surfaceImage()}
+    class={surfaceImage}
     style={{ height: props.height, width: props.width }}
     src={props.src}
     alt={props.alt}

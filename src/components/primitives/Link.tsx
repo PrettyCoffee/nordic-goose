@@ -43,9 +43,3 @@ export const Link = (props: LinkProps | LinkButtonProps) =>
   ) : (
     <LinkContent {...props} />
   )
-
-export const LinkButton = (props: LinkButtonProps) => (
-  <button onClick={props.onClick} class={linkFromProps("button", props)}>
-    <LinkContent {...props} />
-  </button>
-)
