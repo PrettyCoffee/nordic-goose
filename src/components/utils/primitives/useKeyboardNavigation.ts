@@ -64,7 +64,7 @@ export const useKeyboardNavigation = ({ ref, selector, keys }: Args) => {
     on(children, () => {
       children().forEach(child => setTabIndex(child, -1))
       /** if focusableElement is not inside ref anymore
-       *  We will want to focus index 0
+       *  we will want to focus index 0
        **/
       if (focused != null && !ref()?.contains(focusableElement)) setFocused(0)
     })
@@ -104,7 +104,7 @@ export const useKeyboardNavigation = ({ ref, selector, keys }: Args) => {
 
       const { add: addLeave, remove: removeLeave } = createEventListener({
         ref: window,
-        type: "focusout",
+        type: ["focusout", "mousedown"],
         listener: e => {
           if (e.target && !element?.contains(e.target as Node)) {
             setFocused(null)
