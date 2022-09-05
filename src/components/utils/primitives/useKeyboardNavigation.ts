@@ -7,7 +7,7 @@ import { createObserver } from "./createObserver"
 interface Args {
   ref: Accessor<HTMLElement | null>
   selector: string
-  // TODO: preserveState: boolean
+  preserveState?: boolean
   keys: {
     prev: string
     next: string
@@ -26,7 +26,12 @@ const setTabIndex = (element: Element | null, index: number) => {
   if (element && "tabIndex" in element) (element as any).tabIndex = index
 }
 
-export const useKeyboardNavigation = ({ ref, selector, keys }: Args) => {
+export const useKeyboardNavigation = ({
+  ref,
+  selector,
+  keys,
+  preserveState,
+}: Args) => {
   const [children, setChildren] = createSignal<Element[]>([])
   createObserver({
     ref,
@@ -62,7 +67,9 @@ export const useKeyboardNavigation = ({ ref, selector, keys }: Args) => {
 
   createEffect(
     on(children, () => {
-      children().forEach(child => setTabIndex(child, -1))
+      children().forEach(child => {
+        if (child != focusableElement) setTabIndex(child, -1)
+      })
       /** if focusableElement is not inside ref anymore
        *  we will want to focus index 0
        **/
@@ -86,6 +93,7 @@ export const useKeyboardNavigation = ({ ref, selector, keys }: Args) => {
   createEffect(
     on(ref, () => {
       const element = ref()
+      if (!focusableElement) focusableElement = ref()
       setTabIndex(element, 0)
 
       const navigate = ({ key }: KeyboardEvent) => {
@@ -107,7 +115,7 @@ export const useKeyboardNavigation = ({ ref, selector, keys }: Args) => {
         type: ["focusout", "mousedown"],
         listener: e => {
           if (e.target && !element?.contains(e.target as Node)) {
-            setFocused(null)
+            if (!preserveState) setFocused(null)
             removeLeave()
           }
         },
@@ -117,6 +125,7 @@ export const useKeyboardNavigation = ({ ref, selector, keys }: Args) => {
         ref: element,
         type: "focusin",
         listener: () => {
+          console.log(focusableElement)
           if (focusableElement === ref()) setFocused(0)
           addLeave()
         },

@@ -36,6 +36,7 @@ export const Breadcrumb = <T extends object>(props: BreadcrumbProps<T>) => {
   useKeyboardNavigation({
     ref,
     selector: "button",
+    preserveState: true,
     keys: {
       next: "ArrowRight",
       prev: "ArrowLeft",
