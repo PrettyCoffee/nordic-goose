@@ -10,6 +10,7 @@ const args = {
   "-s": "dist",
   "--api-key": process.env.WEB_EXT_API_KEY,
   "--api-secret": process.env.WEB_EXT_API_SECRET,
+  "--channel": "listed",
 }
 
 const command = `web-ext sign ${parseArgs(args)}`
