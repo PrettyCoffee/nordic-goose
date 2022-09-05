@@ -8,8 +8,9 @@
     "dev": "tsc && vite dev",
     "build": "tsc && vite build",
     "start": "npm run build -- --watch --minify false",
-    "validate": "web-ext lint -s dist",
-    "sign": "npm run build && node scripts/sign.js",
+    "ext:lint": "web-ext lint -s dist",
+    "ext:build": "npm run build && web-ext build -s dist",
+    "ext:sign": "npm run build && node scripts/sign.js",
     "lint": "eslint ./src ./scripts --ignore-path .gitignore",
     "lint:fix": "npm run lint -- --fix"
   },
@@ -18,8 +19,6 @@
     "@vanilla-extract/css-utils": "^0.1.2",
     "@vanilla-extract/recipes": "^0.2.5",
     "@vanilla-extract/sprinkles": "^1.4.1",
-    "install": "^0.13.0",
-    "npm": "^8.19.1",
     "solid-js": "^1.5.4",
     "webextension-polyfill": "^0.10.0"
   },
