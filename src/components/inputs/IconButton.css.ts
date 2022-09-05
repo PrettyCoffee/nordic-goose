@@ -18,6 +18,7 @@ export const iconbutton = recipe({
     alignItems: "center",
     justifyContent: "center",
 
+    color: theme.tokens.fg.base,
     borderRadius: "50%",
     overflow: "hidden",
     isolation: "isolate",
@@ -39,17 +40,15 @@ export const iconbutton = recipe({
         inset: "20%",
         transition: "0.2s solid",
         transitionProperty: "inset, opacity",
+        backgroundColor: theme.tokens.bg.hover,
       },
       "&:hover::before, &:focus-visible::before": {
         inset: 0,
         opacity: 0.3,
-        backgroundColor: theme.tokens.bg.hover,
       },
       "&:active::before": {
         backgroundColor: theme.tokens.bg.primary,
       },
     },
   },
-  variants: {},
-  defaultVariants: {},
 })
