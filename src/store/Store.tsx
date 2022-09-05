@@ -11,10 +11,12 @@ import { BookmarkNode } from "../components"
 import { useBookmarks } from "./useBookmarks"
 import { ObjectRouterResult, useObjectRouter } from "./useObjectRouter"
 
-const browserInfo = browser?.runtime?.getBrowserInfo
-const isFirefox = browserInfo && (await browserInfo()).name === "Firefox"
+const browserInfo = browser?.runtime?.getBrowserInfo()
+const whichBrowser = browserInfo.then(info =>
+  info.name === "Firefox" ? "firefox" : "chrome"
+)
 
-const toolbarId = isFirefox ? "toolbar_____" : "1"
+const toolbarId = { firefox: "toolbar_____", chrome: "1" }
 
 interface ContextState {
   path: ObjectRouterResult
@@ -33,7 +35,9 @@ const Context = createContext<ContextState>({
 })
 
 export const StoreProvider = (props: ParentProps) => {
-  const [homeId, setHomeId] = createSignal<string | null>(toolbarId)
+  const [homeId, setHomeId] = createSignal<string | null>(null)
+  whichBrowser.then(browser => setHomeId(toolbarId[browser]))
+
   const bookmarks = useBookmarks()
   const path = useObjectRouter({ nodes: bookmarks, homeId })
 
