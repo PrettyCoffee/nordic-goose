@@ -8,14 +8,14 @@ import {
   useKeyboardNavigation,
 } from "../components"
 import { useStore, BookmarkNode } from "../store"
-import { bookmarks } from "./Bookmarks.css"
+import { bookmarks, bookmark, scrollX } from "./Bookmarks.css"
 
 interface NodeProp {
   node: BookmarkNode
 }
 
 const BookmarkLink = (props: NodeProp) => (
-  <Link href={props.node.url} icon={Bookmark} nowrap>
+  <Link class={bookmark} href={props.node.url} icon={Bookmark} nowrap>
     {props.node.label}
   </Link>
 )
@@ -24,7 +24,13 @@ const GroupButton = (props: NodeProp) => {
   const store = useStore()
   const setAsGroup = () => store.path.set(props.node)
   return (
-    <Link onClick={setAsGroup} icon={Folder} nowrap highlighted>
+    <Link
+      class={bookmark}
+      onClick={setAsGroup}
+      icon={Folder}
+      nowrap
+      highlighted
+    >
       {props.node.label}
     </Link>
   )
@@ -85,10 +91,16 @@ export const Bookmarks = (props: BookmarksProps) => {
   })
 
   return (
-    <div ref={setRef} class={bookmarks()}>
-      {sortNodes(visibleBookmarks())?.map(node =>
-        node.nodes ? <GroupButton node={node} /> : <BookmarkLink node={node} />
-      )}
+    <div class={scrollX}>
+      <div ref={setRef} class={bookmarks}>
+        {sortNodes(visibleBookmarks())?.map(node =>
+          node.nodes ? (
+            <GroupButton node={node} />
+          ) : (
+            <BookmarkLink node={node} />
+          )
+        )}
+      </div>
     </div>
   )
 }

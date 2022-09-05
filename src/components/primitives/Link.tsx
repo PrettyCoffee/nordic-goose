@@ -6,6 +6,7 @@ import { link, LinkVariants } from "./Link.css"
 import { Text } from "./Text"
 
 const linkFromProps = (as: "a" | "button", args: LinkProps | LinkButtonProps) =>
+  (args.class ? `${args.class} ` : "") +
   link({
     as,
     nowrap: args.nowrap,
@@ -23,6 +24,7 @@ type LinkProps = ParentProps &
   Omit<LinkVariants, "as"> & {
     icon?: FeatherIcon
     href?: string
+    class?: string
   }
 
 interface LinkButtonProps extends Omit<LinkProps, "href"> {
