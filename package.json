@@ -14,7 +14,11 @@
     "lint": "eslint ./src ./scripts --ignore-path .gitignore",
     "lint:fix": "npm run lint -- --fix"
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "dependencies": {
+    "@nogo/ext": "*",
     "@vanilla-extract/css": "^1.7.4",
     "@vanilla-extract/css-utils": "^0.1.2",
     "@vanilla-extract/recipes": "^0.2.5",

@@ -1,0 +1,11 @@
+{
+  "name": "@nogo/ext",
+  "version": "0.0.0",
+  "main": "./src/index.ts",
+  "scripts": {
+    "ts-check": "tsc || echo 'ERROR: Typescript check failed'",
+    "update": "ncu -u -t latest",
+    "lint": "eslint ./src --config ../../.eslintrc --ignore-path ../../.gitignore",
+    "lint:fix": "npm run lint -- --fix"
+  }
+}

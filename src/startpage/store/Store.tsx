@@ -1,3 +1,4 @@
+import { BookmarkNode, whichBrowser } from "@nogo/ext"
 import {
   Accessor,
   createContext,
@@ -5,18 +6,11 @@ import {
   ParentProps,
   useContext,
 } from "solid-js"
-import browser from "webextension-polyfill"
 
-import { BookmarkNode } from "../../utils"
 import { useBookmarks } from "./useBookmarks"
 import { ObjectRouterResult, useObjectRouter } from "./useObjectRouter"
 
-const browserInfo = browser?.runtime?.getBrowserInfo()
-const whichBrowser = browserInfo.then(info =>
-  info.name === "Firefox" ? "firefox" : "chrome"
-)
-
-const toolbarId = { firefox: "toolbar_____", chrome: "1" }
+const toolbarId = { firefox: "toolbar_____", chromium: "1" }
 
 interface ContextState {
   path: ObjectRouterResult

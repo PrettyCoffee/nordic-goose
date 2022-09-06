@@ -125,7 +125,6 @@ export const useKeyboardNavigation = ({
         ref: element,
         type: "focusin",
         listener: () => {
-          console.log(focusableElement)
           if (focusableElement === ref()) setFocused(0)
           addLeave()
         },
