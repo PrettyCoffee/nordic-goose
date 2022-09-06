@@ -1,6 +1,6 @@
 import { createSignal, onCleanup } from "solid-js"
 
-import { BookmarkNode, readBookmarks, bookmarksListener } from "../components"
+import { BookmarkNode, readBookmarks, bookmarksListener } from "../../utils"
 
 const initialBookmarks = readBookmarks()
 

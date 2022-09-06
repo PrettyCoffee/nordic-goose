@@ -22,7 +22,7 @@ export default defineConfig({
     webExt({
       manifest: getManifest,
       assets: "assets",
-      additionalInputs: ["index.html"],
+      additionalInputs: ["startpage/index.html"],
       watchFilePaths: [root("src/manifest.js")],
       verbose: false,
       browser: process.env.TARGET || "firefox",

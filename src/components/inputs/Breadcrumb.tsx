@@ -1,7 +1,7 @@
 import { For, ParentProps } from "solid-js"
 
+import { createRef, useKeyboardNavigation } from "../../utils"
 import { Link } from "../primitives"
-import { createRef, useKeyboardNavigation } from "../utils"
 import { breadcrumb, separator } from "./Breadcrumb.css"
 
 const Separator = () => <span class={separator}>/</span>

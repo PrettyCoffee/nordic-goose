@@ -1,11 +1,11 @@
 /* @refresh reload */
 import { render } from "solid-js/web"
 
+import { Breakpoint, IconButton, Github } from "../components"
+import { ThemeProvider } from "../theme"
 import { App } from "./app/App"
-import { Breakpoint, IconButton, Github } from "./components"
 import { duck, github } from "./index.css"
 import { StoreProvider } from "./store/Store"
-import { ThemeProvider } from "./theme"
 
 render(
   () => (
@@ -15,7 +15,7 @@ render(
           <App />
         </Breakpoint>
         <Breakpoint mobile>
-          <img class={duck} src="assets/duck.gif" alt="" />
+          <img class={duck} src="/assets/duck.gif" alt="" />
         </Breakpoint>
         <span class={github}>
           <IconButton

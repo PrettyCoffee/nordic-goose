@@ -13,7 +13,7 @@ export const getManifest = () => ({
     "128": "assets/icon128.png",
   },
   chrome_url_overrides: {
-    newtab: "index.html",
+    newtab: "startpage/index.html",
   },
   permissions: ["tabs", "bookmarks"],
 })

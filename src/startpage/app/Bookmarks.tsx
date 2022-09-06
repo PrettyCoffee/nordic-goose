@@ -1,13 +1,8 @@
 import { Accessor, createMemo } from "solid-js"
 
-import {
-  Bookmark,
-  Folder,
-  Link,
-  createRef,
-  useKeyboardNavigation,
-} from "../components"
-import { useStore, BookmarkNode } from "../store"
+import { Bookmark, Folder, Link } from "../../components"
+import { useKeyboardNavigation, createRef, BookmarkNode } from "../../utils"
+import { useStore } from "../store"
 import { bookmarks, bookmark, scrollX } from "./Bookmarks.css"
 
 interface NodeProp {

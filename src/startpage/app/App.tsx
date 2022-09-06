@@ -1,9 +1,15 @@
 import { createEffect, createSignal } from "solid-js"
 
-import { Search, TextInput, Surface, Headline, Icon } from "../components"
-import { Breadcrumb } from "../components/inputs/Breadcrumb"
+import {
+  Search,
+  TextInput,
+  Surface,
+  Headline,
+  Icon,
+  Breadcrumb,
+} from "../../components"
+import { useTheme } from "../../theme"
 import { useStore } from "../store"
-import { useTheme } from "../theme"
 import { Bookmarks } from "./Bookmarks"
 
 export const App = () => {
@@ -31,7 +37,7 @@ export const App = () => {
           <Bookmarks filter={filter} />
         </div>
       </Surface.Main>
-      <Surface.Image src="assets/duck.gif" alt="" width="13rem" />
+      <Surface.Image src="/assets/duck.gif" alt="" width="13rem" />
     </Surface>
   )
 }
