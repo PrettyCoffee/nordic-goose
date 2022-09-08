@@ -66,15 +66,22 @@ const getBorders = (color: Colors) => ({
   secondary: border(color.secondary[8]),
 })
 
-const getTokens = ({ neutral, primary }: Colors) => ({
+const getDarkTokens = ({ neutral, primary }: Colors) => ({
+  shadowHsl: "213deg 31% 30%",
   fg: {
     base: neutral[12],
     muted: neutral[6],
-    active: primary[10],
 
     hover: neutral[14],
     press: primary[15],
     focus: primary[14],
+
+    active: {
+      base: primary[10],
+      hover: neutral[12],
+      press: primary[13],
+      focus: primary[12],
+    },
   },
   bg: {
     base: neutral[3],
@@ -89,20 +96,49 @@ const getTokens = ({ neutral, primary }: Colors) => ({
   },
 })
 
+const getLightTokens = ({ neutral, primary }: Colors) => {
+  const { bg, fg } = getDarkTokens(light)
+  return {
+    shadowHsl: "213deg 19% 55%",
+    fg: {
+      ...fg,
+      base: neutral[10],
+      muted: neutral[4],
+
+      hover: neutral[13],
+      press: primary[15],
+      focus: primary[13],
+
+      active: {
+        base: primary[7],
+        hover: neutral[9],
+        press: primary[11],
+        focus: primary[9],
+      },
+    },
+    bg: {
+      ...bg,
+      base: "hsl(220, 18%, 97%)",
+      surface: "hsl(220, 18%, 97%)",
+      primary: primary[4],
+    },
+  }
+}
+
 const font = "Quicksand, sans-serif"
 
 export const [lighThemeClass, theme] = createTheme({
-  color: light,
+  //color: light,
   border: getBorders(light),
-  tokens: getTokens(light),
+  tokens: getLightTokens(light),
   space,
   font,
 })
 
 export const darkThemeClass = createTheme(theme, {
-  color: dark,
+  //color: dark,
   border: getBorders(dark),
-  tokens: getTokens(dark),
+  tokens: getDarkTokens(dark),
   space,
   font,
 })

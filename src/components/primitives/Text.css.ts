@@ -14,7 +14,7 @@ export const text = recipe({
     as: {
       span: {},
       h1: {
-        color: theme.tokens.fg.active,
+        color: theme.tokens.fg.active.base,
         fontSize: theme.space.lg,
       },
     },
@@ -36,8 +36,6 @@ export const text = recipe({
   },
   defaultVariants: {
     as: "span",
-    nowrap: false,
-    inherit: true,
   },
 })
 

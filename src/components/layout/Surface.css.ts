@@ -19,19 +19,22 @@ export const surface = style({
   backgroundColor: theme.tokens.bg.primary,
   borderRadius: theme.space.lg,
   overflow: "hidden",
-  boxShadow: "16px 16px 0px rgb(52, 71, 95)",
+  boxShadow: `16px 16px 0px hsl(${theme.tokens.shadowHsl})`,
 
   padding: theme.space.sm,
 })
 
 export const surfaceContent = style({
   vars: {
-    "--shadow-color": "214deg 31% 30%",
     "--surface-content-shadow": `
-      1px 0px 1.1px hsl(var(--shadow-color) / 0.5),
-      3.3px 0px 3.7px -0.8px hsl(var(--shadow-color) / 0.5),
-      8.2px 0px 9.2px -1.7px hsl(var(--shadow-color) / 0.5),
-      20px 0.1px 22.5px -2.5px hsl(var(--shadow-color) / 0.5)
+      0px 0px 0.2px hsl(${theme.tokens.shadowHsl} / 0.34),
+      0.9px 0px 1px -0.4px hsl(${theme.tokens.shadowHsl} / 0.34),
+      1.7px 0px 1.9px -0.7px hsl(${theme.tokens.shadowHsl} / 0.34),
+      2.7px 0px 3px -1.1px hsl(${theme.tokens.shadowHsl} / 0.34),
+      4.4px 0px 5px -1.4px hsl(${theme.tokens.shadowHsl} / 0.34),
+      6.8px 0px 7.7px -1.8px hsl(${theme.tokens.shadowHsl} / 0.34),
+      10.4px 0px 11.7px -2.1px hsl(${theme.tokens.shadowHsl} / 0.34),
+      15.3px 0px 17.2px -2.5px hsl(${theme.tokens.shadowHsl} / 0.34);
     `,
   },
   flex: 1,

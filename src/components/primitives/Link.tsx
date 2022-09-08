@@ -16,7 +16,9 @@ const linkFromProps = (as: "a" | "button", args: LinkProps | LinkButtonProps) =>
 const LinkContent = (props: LinkProps | LinkButtonProps) => (
   <>
     {props.icon && <Icon icon={props.icon} size="md" />}
-    <Text nowrap={props.nowrap}>{props.children}</Text>
+    <Text inherit nowrap={props.nowrap}>
+      {props.children}
+    </Text>
   </>
 )
 

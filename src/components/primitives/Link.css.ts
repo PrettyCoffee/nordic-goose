@@ -46,16 +46,16 @@ export const link = recipe({
     },
     highlighted: {
       true: {
-        color: theme.tokens.fg.active,
+        color: theme.tokens.fg.active.base,
         selectors: {
           "&:hover": {
-            color: theme.color.primary[12],
+            color: theme.tokens.fg.active.hover,
           },
           "&:focus-visible": {
-            color: theme.color.primary[12],
+            color: theme.tokens.fg.active.focus,
           },
           "&:active": {
-            color: theme.color.primary[13],
+            color: theme.tokens.fg.active.press,
           },
         },
       },
