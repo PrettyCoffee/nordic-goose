@@ -2,8 +2,8 @@ import { BookmarkNode } from "@nogo/ext"
 import { Accessor, createMemo } from "solid-js"
 
 import { Bookmark, Folder, Link } from "../../components"
+import { useStore } from "../../store"
 import { useKeyboardNavigation, createRef } from "../../utils"
-import { useStore } from "../store"
 import { bookmarks, bookmark, scrollX } from "./Bookmarks.css"
 
 interface NodeProp {

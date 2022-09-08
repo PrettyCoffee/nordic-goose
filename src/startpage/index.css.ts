@@ -10,8 +10,8 @@ export const duck = style({
   margin: "auto",
 })
 
-export const github = style({
+export const icons = style({
   position: "fixed",
-  bottom: theme.space.sm,
+  top: theme.space.sm,
   right: theme.space.sm,
 })

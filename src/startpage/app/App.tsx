@@ -8,8 +8,8 @@ import {
   Icon,
   Breadcrumb,
 } from "../../components"
+import { useStore } from "../../store"
 import { useTheme } from "../../theme"
-import { useStore } from "../store"
 import { Bookmarks } from "./Bookmarks"
 
 export const App = () => {
