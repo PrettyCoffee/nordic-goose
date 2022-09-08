@@ -1,4 +1,3 @@
-import { BookmarkNode, whichBrowser } from "@nogo/ext"
 import {
   Accessor,
   createContext,
@@ -7,6 +6,7 @@ import {
   useContext,
 } from "solid-js"
 
+import { BookmarkNode, whichBrowser } from "../utils"
 import { useBookmarks } from "./useBookmarks"
 import { ObjectRouterResult, useObjectRouter } from "./useObjectRouter"
 

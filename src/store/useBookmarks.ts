@@ -1,5 +1,6 @@
-import { bookmarks, BookmarkNode } from "@nogo/ext"
 import { createSignal, onCleanup } from "solid-js"
+
+import { bookmarks, BookmarkNode } from "../utils"
 
 const initialBookmarks = bookmarks.read()
 
