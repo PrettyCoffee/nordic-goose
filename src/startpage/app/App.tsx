@@ -12,11 +12,11 @@ import { useStore } from "../../store"
 import { Bookmarks } from "./Bookmarks"
 
 export const App = () => {
-  const { path } = useStore()
+  const { path, maxWidth } = useStore()
   const [filter, setFilter] = createSignal("")
 
   return (
-    <Surface>
+    <Surface maxWidth={maxWidth.get()}>
       <Surface.Main>
         <Headline nowrap>Nordic goose</Headline>
         <TextInput onChange={setFilter} placeholder="Search bookmark" autofocus>

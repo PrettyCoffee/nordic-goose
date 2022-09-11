@@ -2,7 +2,17 @@ import { ParentProps } from "solid-js"
 
 import { surface, surfaceContent, surfaceImage } from "./Surface.css"
 
-const SurfaceLayout = (props: ParentProps) => <div class={surface} {...props} />
+interface SurfaceProps extends ParentProps {
+  maxWidth?: number
+}
+
+const SurfaceLayout = (props: SurfaceProps) => (
+  <div
+    class={surface}
+    {...props}
+    style={props.maxWidth ? { "max-width": `${props.maxWidth}px` } : {}}
+  />
+)
 
 const SurfaceMain = (props: ParentProps) => (
   <main class={surfaceContent} {...props} />

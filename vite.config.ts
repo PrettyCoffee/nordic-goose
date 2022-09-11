@@ -23,7 +23,7 @@ export default defineConfig({
       manifest: getManifest,
       assets: "assets",
       additionalInputs: ["startpage/startpage.html"],
-      watchFilePaths: [root("src/manifest.js")],
+      watchFilePaths: [root("src/manifest.ts")],
       verbose: false,
       browser: process.env.TARGET || "firefox",
     }),

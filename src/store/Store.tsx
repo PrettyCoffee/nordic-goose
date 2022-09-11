@@ -17,6 +17,10 @@ interface ContextState {
     toggle: () => void
     get: Accessor<boolean>
   }
+  maxWidth: {
+    set: (value: number) => void
+    get: Accessor<number>
+  }
 }
 
 const Context = createContext<ContextState>({
@@ -36,12 +40,17 @@ const Context = createContext<ContextState>({
     toggle: () => null,
     get: () => false,
   },
+  maxWidth: {
+    set: () => null,
+    get: () => 0,
+  },
 })
 
 const initialHome = await whichBrowser.then(browser => toolbarId[browser])
 export const StoreProvider = (props: ParentProps) => {
   const [homeId, setHomeId] = createStorage<string | null>("home", initialHome)
   const [hideGithub, setHideGithub] = createStorage("hide-github-button", false)
+  const [maxWidth, setMaxWidth] = createStorage("max-surface-width", 800)
 
   const themeMode = useThemeMode()
   const bookmarks = useBookmarks()
@@ -59,6 +68,10 @@ export const StoreProvider = (props: ParentProps) => {
         hideGithub: {
           get: hideGithub,
           toggle: toggleHideGithub,
+        },
+        maxWidth: {
+          get: maxWidth,
+          set: setMaxWidth,
         },
       }}
     >
