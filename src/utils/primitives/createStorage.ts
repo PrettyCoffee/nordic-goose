@@ -10,8 +10,15 @@ export const createStorage = <T extends unknown>(
 
   const { get, set, onChange } = keyStorage<T>(key)
 
-  get().then(setValue)
-  onCleanup(onChange(setValue))
+  get().then(existing => {
+    if (existing === undefined) {
+      set(initialValue)
+    } else {
+      setValue(existing)
+    }
+  })
+  const removeListener = onChange(setValue)
+  onCleanup(removeListener)
 
   return [value, set] as const
 }
