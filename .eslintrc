@@ -29,7 +29,7 @@
           "order": "asc",
           "caseInsensitive": true
         }
-      }
+      },
     ],
 
     "prettier/prettier": [
@@ -48,9 +48,9 @@
 
     "unused-imports/no-unused-imports": "error",
     "@typescript-eslint/no-use-before-define": ["error"],
+    "solid/reactivity": "off",
     "jsx-a11y/no-onchange": "off", // deprecated rule, will be deleted in a future release
-    "solid/reactivity": "off"
-
+    "jsx-a11y/label-has-associated-control": "off" // does not work with solid-js
   },
   "settings": {
     "jest": { "version": 27 }, // fixes error where jest is needed
