@@ -14,10 +14,10 @@ export const getManifest = () => ({
   },
   permissions: ["tabs", "bookmarks", "storage"],
   chrome_url_overrides: {
-    newtab: "startpage/index.html",
+    newtab: "startpage/startpage.html",
   },
   options_ui: {
-    page: "options/index.html",
+    page: "options/options.html",
     browser_style: false,
   },
 })

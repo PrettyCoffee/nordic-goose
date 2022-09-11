@@ -14,14 +14,14 @@ export const IconBar = (props: AppShellProps) => {
         <IconButton
           icon={Home}
           caption="Back to startpage"
-          href={runtime.getURL("startpage/index.html")}
+          href={runtime.getURL("startpage/startpage.html")}
         />
       </Show>
       <Show when={props.origin === "startpage"}>
         <IconButton
           icon={Settings}
           caption="Open settings"
-          href={runtime.getURL("options/index.html")}
+          href={runtime.getURL("options/options.html")}
         />
       </Show>
       <Show when={!hideGithub.get()}>

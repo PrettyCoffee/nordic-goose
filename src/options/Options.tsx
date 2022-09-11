@@ -1,23 +1,14 @@
-import { Surface, Headline, Switch } from "../components"
-import { useStore } from "../store"
+/* @refresh reload */
+import { render } from "solid-js/web"
 
-export const Options = () => {
-  const { themeMode, hideGithub } = useStore()
-  return (
-    <Surface>
-      <Surface.Main>
-        <Headline nowrap>Options</Headline>
-        <Switch
-          label="Light theme"
-          checked={themeMode.get() === "light"}
-          onChange={themeMode.toggle}
-        />
-        <Switch
-          label="Hide github button"
-          checked={hideGithub.get()}
-          onChange={hideGithub.toggle}
-        />
-      </Surface.Main>
-    </Surface>
-  )
-}
+import { AppShell } from "../components"
+import { App } from "./App"
+
+render(
+  () => (
+    <AppShell origin="options">
+      <App />
+    </AppShell>
+  ),
+  document.getElementById("root") as HTMLElement
+)

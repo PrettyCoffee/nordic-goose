@@ -3,7 +3,7 @@ import { render } from "solid-js/web"
 
 import { Breakpoint, AppShell } from "../components"
 import { App } from "./app/App"
-import { duck } from "./index.css"
+import { duck } from "./startpage.css"
 
 render(
   () => (
