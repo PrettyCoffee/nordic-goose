@@ -6,29 +6,34 @@ import { IconButton } from "../../inputs"
 import { Github, Home, Settings } from "../../primitives"
 import { icons } from "./AppShell.css"
 
-export const IconBar = (props: AppShellProps) => (
-  <div class={icons}>
-    <Show when={props.origin === "options"}>
-      <IconButton
-        icon={Home}
-        caption="Back to startpage"
-        href={runtime.getURL("startpage/index.html")}
-      />
-    </Show>
-    <Show when={props.origin === "startpage"}>
-      <IconButton
-        icon={Settings}
-        caption="Open settings"
-        href={runtime.getURL("options/index.html")}
-      />
-    </Show>
-    <IconButton
-      icon={Github}
-      caption="Source code"
-      href="https://github.com/PrettyCoffee/nordic-goose"
-    />
-  </div>
-)
+export const IconBar = (props: AppShellProps) => {
+  const { hideGithub } = useStore()
+  return (
+    <div class={icons}>
+      <Show when={props.origin === "options"}>
+        <IconButton
+          icon={Home}
+          caption="Back to startpage"
+          href={runtime.getURL("startpage/index.html")}
+        />
+      </Show>
+      <Show when={props.origin === "startpage"}>
+        <IconButton
+          icon={Settings}
+          caption="Open settings"
+          href={runtime.getURL("options/index.html")}
+        />
+      </Show>
+      <Show when={!hideGithub.get()}>
+        <IconButton
+          icon={Github}
+          caption="Source code"
+          href="https://github.com/PrettyCoffee/nordic-goose"
+        />
+      </Show>
+    </div>
+  )
+}
 
 const App = (props: ParentProps) => {
   const { themeMode } = useStore()

@@ -2,12 +2,12 @@
 import { render } from "solid-js/web"
 
 import { AppShell } from "../components"
-import { App } from "./App"
+import { Options } from "./Options"
 
 render(
   () => (
     <AppShell origin="options">
-      <App />
+      <Options />
     </AppShell>
   ),
   document.getElementById("root") as HTMLElement

@@ -13,6 +13,10 @@ interface ContextState {
   bookmarks: Accessor<BookmarkNode[]>
   setHomeId: (id: string) => void
   themeMode: ModeState
+  hideGithub: {
+    toggle: () => void
+    get: Accessor<boolean>
+  }
 }
 
 const Context = createContext<ContextState>({
@@ -28,15 +32,22 @@ const Context = createContext<ContextState>({
     toggle: () => null,
     class: () => darkThemeClass,
   },
+  hideGithub: {
+    toggle: () => null,
+    get: () => false,
+  },
 })
 
 const initialHome = await whichBrowser.then(browser => toolbarId[browser])
 export const StoreProvider = (props: ParentProps) => {
   const [homeId, setHomeId] = createStorage<string | null>("home", initialHome)
-  const themeMode = useThemeMode()
+  const [hideGithub, setHideGithub] = createStorage("hide-github-button", false)
 
+  const themeMode = useThemeMode()
   const bookmarks = useBookmarks()
   const path = useObjectRouter({ nodes: bookmarks, homeId })
+
+  const toggleHideGithub = () => setHideGithub(!hideGithub())
 
   return (
     <Context.Provider
@@ -45,6 +56,10 @@ export const StoreProvider = (props: ParentProps) => {
         bookmarks,
         setHomeId,
         themeMode,
+        hideGithub: {
+          get: hideGithub,
+          toggle: toggleHideGithub,
+        },
       }}
     >
       {props.children}
