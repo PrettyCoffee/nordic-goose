@@ -1,13 +1,13 @@
 import { createEffect } from "solid-js"
 
 import { Surface, Headline } from "../components"
-import { useTheme } from "../theme"
+import { useStore } from "../store"
 
 export const App = () => {
-  const theme = useTheme()
+  const { themeMode } = useStore()
 
   createEffect(() => {
-    document.body.classList.value = theme.themeClass()
+    document.body.classList.value = themeMode.class()
   })
 
   return (

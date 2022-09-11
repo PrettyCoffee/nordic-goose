@@ -9,16 +9,14 @@ import {
   Breadcrumb,
 } from "../../components"
 import { useStore } from "../../store"
-import { useTheme } from "../../theme"
 import { Bookmarks } from "./Bookmarks"
 
 export const App = () => {
-  const theme = useTheme()
-  const store = useStore()
+  const { path, themeMode } = useStore()
   const [filter, setFilter] = createSignal("")
 
   createEffect(() => {
-    document.body.classList.value = theme.themeClass()
+    document.body.classList.value = themeMode.class()
   })
 
   return (
@@ -29,9 +27,9 @@ export const App = () => {
           <Icon icon={Search} size="md" />
         </TextInput>
         <Breadcrumb
-          path={store.path.get()}
+          path={path.get()}
           labelAccessor="label"
-          onChange={store.path.set}
+          onChange={path.set}
         />
         <div>
           <Bookmarks filter={filter} />
