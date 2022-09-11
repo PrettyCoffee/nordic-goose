@@ -1,34 +1,20 @@
 /* @refresh reload */
 import { render } from "solid-js/web"
-import { runtime } from "webextension-polyfill"
 
-import { Breakpoint, IconButton, Github, Settings } from "../components"
-import { StoreProvider } from "../store"
+import { Breakpoint, AppShell } from "../components"
 import { App } from "./app/App"
-import { duck, icons } from "./index.css"
+import { duck } from "./index.css"
 
 render(
   () => (
-    <StoreProvider>
+    <AppShell origin="startpage">
       <Breakpoint desktop laptop tablet>
         <App />
       </Breakpoint>
       <Breakpoint mobile>
         <img class={duck} src="/assets/duck.gif" alt="" />
       </Breakpoint>
-      <span class={icons}>
-        <IconButton
-          icon={Settings}
-          caption="Open settings"
-          href={runtime.getURL("options/index.html")}
-        />
-        <IconButton
-          icon={Github}
-          caption="Source code"
-          href="https://github.com/PrettyCoffee/nordic-goose"
-        />
-      </span>
-    </StoreProvider>
+    </AppShell>
   ),
   document.getElementById("root") as HTMLElement
 )

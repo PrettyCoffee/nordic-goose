@@ -1,4 +1,4 @@
-import { createEffect, createSignal } from "solid-js"
+import { createSignal } from "solid-js"
 
 import {
   Search,
@@ -12,12 +12,8 @@ import { useStore } from "../../store"
 import { Bookmarks } from "./Bookmarks"
 
 export const App = () => {
-  const { path, themeMode } = useStore()
+  const { path } = useStore()
   const [filter, setFilter] = createSignal("")
-
-  createEffect(() => {
-    document.body.classList.value = themeMode.class()
-  })
 
   return (
     <Surface>

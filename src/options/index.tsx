@@ -1,14 +1,14 @@
 /* @refresh reload */
 import { render } from "solid-js/web"
 
-import { StoreProvider } from "../store"
+import { AppShell } from "../components"
 import { App } from "./App"
 
 render(
   () => (
-    <StoreProvider>
+    <AppShell origin="options">
       <App />
-    </StoreProvider>
+    </AppShell>
   ),
   document.getElementById("root") as HTMLElement
 )
