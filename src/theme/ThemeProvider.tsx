@@ -3,11 +3,11 @@ import {
   Accessor,
   createContext,
   createMemo,
-  createSignal,
   ParentProps,
   useContext,
 } from "solid-js"
 
+import { createStorage } from "../utils"
 import { darkThemeClass, lighThemeClass } from "./theme.css"
 
 type Mode = "dark" | "light"
@@ -25,12 +25,12 @@ const Context = createContext<ContextState>({
 })
 
 export const ThemeProvider = (props: ParentProps) => {
-  const [mode, setMode] = createSignal<Mode>("dark")
+  const [mode, setMode] = createStorage<Mode>("theme-mode", "dark")
   const themeClass = createMemo(() =>
     mode() === "dark" ? darkThemeClass : lighThemeClass
   )
 
-  const toggleMode = () => setMode(mode => (mode === "dark" ? "light" : "dark"))
+  const toggleMode = () => setMode(mode() === "dark" ? "light" : "dark")
 
   return (
     <Context.Provider value={{ toggleMode, mode, themeClass }}>

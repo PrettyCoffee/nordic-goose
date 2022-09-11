@@ -1,12 +1,6 @@
-import {
-  Accessor,
-  createContext,
-  createSignal,
-  ParentProps,
-  useContext,
-} from "solid-js"
+import { Accessor, createContext, ParentProps, useContext } from "solid-js"
 
-import { BookmarkNode, whichBrowser } from "../utils"
+import { BookmarkNode, whichBrowser, createStorage } from "../utils"
 import { useBookmarks } from "./useBookmarks"
 import { ObjectRouterResult, useObjectRouter } from "./useObjectRouter"
 
@@ -28,9 +22,9 @@ const Context = createContext<ContextState>({
   setHomeId: () => null,
 })
 
+const initialHome = await whichBrowser.then(browser => toolbarId[browser])
 export const StoreProvider = (props: ParentProps) => {
-  const [homeId, setHomeId] = createSignal<string | null>(null)
-  whichBrowser.then(browser => setHomeId(toolbarId[browser]))
+  const [homeId, setHomeId] = createStorage<string | null>("home", initialHome)
 
   const bookmarks = useBookmarks()
   const path = useObjectRouter({ nodes: bookmarks, homeId })
