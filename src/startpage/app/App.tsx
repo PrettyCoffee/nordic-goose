@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js"
+import { createMemo, createSignal } from "solid-js"
 
 import {
   Search,
@@ -12,13 +12,25 @@ import { useStore } from "../../store"
 import { Bookmarks } from "./Bookmarks"
 
 export const App = () => {
-  const { path, maxWidth } = useStore()
+  const { path, maxWidth, themeMode, duckMode } = useStore()
   const [filter, setFilter] = createSignal("")
+
+  const title = createMemo(() => {
+    const duck = duckMode.get()
+    const isCtp = themeMode.get() === "gooseppuccin"
+    return duck
+      ? isCtp
+        ? "Duckppuccin"
+        : "Nordic duck"
+      : isCtp
+      ? "Gooseppuccin"
+      : "Nordic goose"
+  })
 
   return (
     <Surface maxWidth={maxWidth.get()}>
       <Surface.Main>
-        <Headline nowrap>Nordic goose</Headline>
+        <Headline nowrap>{title()}</Headline>
         <TextInput onChange={setFilter} placeholder="Search bookmark" autofocus>
           <Icon icon={Search} size="md" />
         </TextInput>

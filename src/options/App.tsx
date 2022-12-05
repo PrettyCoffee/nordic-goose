@@ -1,9 +1,18 @@
+import { createMemo } from "solid-js"
+
 import { Surface, Headline, Switch, Slider } from "../components"
 import { useStore } from "../store"
 import { column, layout } from "./App.css"
 
 export const App = () => {
-  const { themeMode, hideGithub, maxWidth } = useStore()
+  const { themeMode, hideGithub, maxWidth, duckMode } = useStore()
+  const ppuccin = createMemo(() =>
+    duckMode.get() ? "Duckppuccin" : "Gooseppuccin"
+  )
+
+  const isLightMode = createMemo(() => themeMode.get() === "light")
+  const isPpuccinMode = createMemo(() => themeMode.get() === "gooseppuccin")
+
   return (
     <Surface maxWidth={maxWidth.get()}>
       <Surface.Main>
@@ -12,13 +21,25 @@ export const App = () => {
           <div class={column}>
             <Switch
               label="Light theme"
-              checked={themeMode.get() === "light"}
-              onChange={themeMode.toggle}
+              checked={isLightMode()}
+              onChange={() => themeMode.set(isLightMode() ? "dark" : "light")}
+            />
+            <Switch
+              label={ppuccin()}
+              checked={isPpuccinMode()}
+              onChange={() =>
+                themeMode.set(isPpuccinMode() ? "dark" : "gooseppuccin")
+              }
             />
             <Switch
               label="Hide github button"
               checked={hideGithub.get()}
               onChange={hideGithub.toggle}
+            />
+            <Switch
+              label="Activate duck mode"
+              checked={duckMode.get()}
+              onChange={duckMode.toggle}
             />
           </div>
           <div class={column}>

@@ -1,4 +1,7 @@
 import { createTheme } from "@vanilla-extract/css"
+
+import { tokens as ctpTokens } from "./catppuccino.css"
+
 type Number = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15
 type Color = Record<Number, string>
 
@@ -31,19 +34,16 @@ const invert = (light: Color) => {
 interface Colors {
   neutral: Color
   primary: Color
-  secondary: Color
 }
 
 const light = {
   neutral: getColors(220, 18),
   primary: getColors(213, 30),
-  secondary: getColors(280, 30),
 }
 
 const dark = {
   neutral: invert(light.neutral),
   primary: invert(light.primary),
-  secondary: invert(light.secondary),
 }
 
 const space = {
@@ -61,9 +61,7 @@ const space = {
 const border = (color: string) => `${space["xxs"]} solid ${color}`
 const getBorders = (color: Colors) => ({
   default: border(color.neutral[10]),
-  muted: border(color.neutral[6]),
   primary: border(color.primary[8]),
-  secondary: border(color.secondary[8]),
 })
 
 const getDarkTokens = ({ neutral, primary }: Colors) => ({
@@ -86,13 +84,8 @@ const getDarkTokens = ({ neutral, primary }: Colors) => ({
   bg: {
     base: neutral[3],
     surface: neutral[3],
-    muted: neutral[4],
     primary: primary[8],
-
-    input: neutral[4],
     hover: neutral[6],
-    press: neutral[8],
-    focus: neutral[6],
   },
 })
 
@@ -128,7 +121,6 @@ const getLightTokens = ({ neutral, primary }: Colors) => {
 const font = "Quicksand, sans-serif"
 
 export const [lighThemeClass, theme] = createTheme({
-  //color: light,
   border: getBorders(light),
   tokens: getLightTokens(light),
   space,
@@ -136,9 +128,18 @@ export const [lighThemeClass, theme] = createTheme({
 })
 
 export const darkThemeClass = createTheme(theme, {
-  //color: dark,
   border: getBorders(dark),
   tokens: getDarkTokens(dark),
+  space,
+  font,
+})
+
+export const ctpThemeClass = createTheme(theme, {
+  border: {
+    default: border(ctpTokens.fg.base),
+    primary: border(ctpTokens.fg.active.base),
+  },
+  tokens: ctpTokens,
   space,
   font,
 })

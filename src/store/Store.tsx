@@ -17,6 +17,10 @@ interface ContextState {
     toggle: () => void
     get: Accessor<boolean>
   }
+  duckMode: {
+    toggle: () => void
+    get: Accessor<boolean>
+  }
   maxWidth: {
     set: (value: number) => void
     get: Accessor<number>
@@ -35,8 +39,13 @@ const Context = createContext<ContextState>({
     get: () => "dark",
     toggle: () => null,
     class: () => darkThemeClass,
+    set: () => null,
   },
   hideGithub: {
+    toggle: () => null,
+    get: () => false,
+  },
+  duckMode: {
     toggle: () => null,
     get: () => false,
   },
@@ -50,6 +59,7 @@ const initialHome = await whichBrowser.then(browser => toolbarId[browser])
 export const StoreProvider = (props: ParentProps) => {
   const [homeId, setHomeId] = createStorage<string | null>("home", initialHome)
   const [hideGithub, setHideGithub] = createStorage("hide-github-button", false)
+  const [duckMode, setDuckMode] = createStorage("duck-mode", false)
   const [maxWidth, setMaxWidth] = createStorage("max-surface-width", 800)
 
   const themeMode = useThemeMode()
@@ -57,6 +67,7 @@ export const StoreProvider = (props: ParentProps) => {
   const path = useObjectRouter({ nodes: bookmarks, homeId })
 
   const toggleHideGithub = () => setHideGithub(!hideGithub())
+  const toggleDuckMode = () => setDuckMode(!duckMode())
 
   return (
     <Context.Provider
@@ -72,6 +83,10 @@ export const StoreProvider = (props: ParentProps) => {
         maxWidth: {
           get: maxWidth,
           set: setMaxWidth,
+        },
+        duckMode: {
+          toggle: toggleDuckMode,
+          get: duckMode,
         },
       }}
     >
