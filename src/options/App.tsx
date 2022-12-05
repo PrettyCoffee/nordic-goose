@@ -5,13 +5,14 @@ import { useStore } from "../store"
 import { column, layout } from "./App.css"
 
 export const App = () => {
-  const { themeMode, hideGithub, maxWidth, duckMode } = useStore()
-  const ppuccin = createMemo(() =>
-    duckMode.get() ? "Duckppuccin" : "Gooseppuccin"
-  )
+  const { themeMode, hideGithub, maxWidth, duckMode, retroMode } = useStore()
 
   const isLightMode = createMemo(() => themeMode.get() === "light")
   const isPpuccinMode = createMemo(() => themeMode.get() === "gooseppuccin")
+
+  const duckUrl = createMemo(() =>
+    retroMode.get() ? "duck.gif" : "duck-2.gif"
+  )
 
   return (
     <Surface maxWidth={maxWidth.get()}>
@@ -25,7 +26,7 @@ export const App = () => {
               onChange={() => themeMode.set(isLightMode() ? "dark" : "light")}
             />
             <Switch
-              label={ppuccin()}
+              label={duckMode.get() ? "Duckppuccin" : "Gooseppuccin"}
               checked={isPpuccinMode()}
               onChange={() =>
                 themeMode.set(isPpuccinMode() ? "dark" : "gooseppuccin")
@@ -41,6 +42,11 @@ export const App = () => {
               checked={duckMode.get()}
               onChange={duckMode.toggle}
             />
+            <Switch
+              label={duckMode.get() ? "Retro duck" : "Retro goose"}
+              checked={retroMode.get()}
+              onChange={retroMode.toggle}
+            />
           </div>
           <div class={column}>
             <Slider
@@ -55,7 +61,7 @@ export const App = () => {
           </div>
         </div>
       </Surface.Main>
-      <Surface.Image src="/assets/duck.gif" alt="" width="13rem" />
+      <Surface.Image src={`/assets/${duckUrl()}`} alt="" width="13rem" />
     </Surface>
   )
 }

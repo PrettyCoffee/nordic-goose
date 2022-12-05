@@ -21,6 +21,10 @@ interface ContextState {
     toggle: () => void
     get: Accessor<boolean>
   }
+  retroMode: {
+    toggle: () => void
+    get: Accessor<boolean>
+  }
   maxWidth: {
     set: (value: number) => void
     get: Accessor<number>
@@ -49,6 +53,10 @@ const Context = createContext<ContextState>({
     toggle: () => null,
     get: () => false,
   },
+  retroMode: {
+    toggle: () => null,
+    get: () => false,
+  },
   maxWidth: {
     set: () => null,
     get: () => 0,
@@ -60,6 +68,7 @@ export const StoreProvider = (props: ParentProps) => {
   const [homeId, setHomeId] = createStorage<string | null>("home", initialHome)
   const [hideGithub, setHideGithub] = createStorage("hide-github-button", false)
   const [duckMode, setDuckMode] = createStorage("duck-mode", false)
+  const [retroMode, setRetroMode] = createStorage("retro-mode", true)
   const [maxWidth, setMaxWidth] = createStorage("max-surface-width", 800)
 
   const themeMode = useThemeMode()
@@ -68,6 +77,7 @@ export const StoreProvider = (props: ParentProps) => {
 
   const toggleHideGithub = () => setHideGithub(!hideGithub())
   const toggleDuckMode = () => setDuckMode(!duckMode())
+  const toggleRetroMode = () => setRetroMode(!retroMode())
 
   return (
     <Context.Provider
@@ -87,6 +97,10 @@ export const StoreProvider = (props: ParentProps) => {
         duckMode: {
           toggle: toggleDuckMode,
           get: duckMode,
+        },
+        retroMode: {
+          toggle: toggleRetroMode,
+          get: retroMode,
         },
       }}
     >
