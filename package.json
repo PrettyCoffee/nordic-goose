@@ -3,7 +3,7 @@
   "displayName": "Nordic goose",
   "description": "Browser startpage with nord colors and a dancing goose.",
   "private": true,
-  "version": "0.3.0",
+  "version": "0.3.1",
   "scripts": {
     "dev": "tsc && vite dev",
     "build": "tsc && vite build",
