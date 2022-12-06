@@ -12,7 +12,7 @@ import { useStore } from "../../store"
 import { Bookmarks } from "./Bookmarks"
 
 export const App = () => {
-  const { path, maxWidth, themeMode, duckMode } = useStore()
+  const { path, maxWidth, themeMode, duckMode, retroMode } = useStore()
   const [filter, setFilter] = createSignal("")
 
   const title = createMemo(() => {
@@ -43,7 +43,7 @@ export const App = () => {
           <Bookmarks filter={filter} />
         </div>
       </Surface.Main>
-      <Surface.Image src="/assets/duck.gif" alt="" width="13rem" />
+      <Surface.Image src={retroMode.url()} alt="" width="13rem" />
     </Surface>
   )
 }

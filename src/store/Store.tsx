@@ -1,4 +1,10 @@
-import { Accessor, createContext, ParentProps, useContext } from "solid-js"
+import {
+  Accessor,
+  createContext,
+  createMemo,
+  ParentProps,
+  useContext,
+} from "solid-js"
 
 import { darkThemeClass } from "../theme/theme.css"
 import { BookmarkNode, whichBrowser, createStorage } from "../utils"
@@ -7,6 +13,8 @@ import { ObjectRouterResult, useObjectRouter } from "./useObjectRouter"
 import { ModeState, useThemeMode } from "./useThemeMode"
 
 const toolbarId = { firefox: "toolbar_____", chromium: "1" }
+
+const duckUrl = { retro: "/assets/duck.gif", default: "/assets/duck-2.gif" }
 
 interface ContextState {
   path: ObjectRouterResult
@@ -24,6 +32,7 @@ interface ContextState {
   retroMode: {
     toggle: () => void
     get: Accessor<boolean>
+    url: Accessor<string>
   }
   maxWidth: {
     set: (value: number) => void
@@ -55,7 +64,8 @@ const Context = createContext<ContextState>({
   },
   retroMode: {
     toggle: () => null,
-    get: () => false,
+    get: () => true,
+    url: () => duckUrl["retro"],
   },
   maxWidth: {
     set: () => null,
@@ -79,6 +89,8 @@ export const StoreProvider = (props: ParentProps) => {
   const toggleDuckMode = () => setDuckMode(!duckMode())
   const toggleRetroMode = () => setRetroMode(!retroMode())
 
+  const gifUrl = createMemo(() => duckUrl[retroMode() ? "retro" : "default"])
+
   return (
     <Context.Provider
       value={{
@@ -101,6 +113,7 @@ export const StoreProvider = (props: ParentProps) => {
         retroMode: {
           toggle: toggleRetroMode,
           get: retroMode,
+          url: gifUrl,
         },
       }}
     >

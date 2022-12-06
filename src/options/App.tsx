@@ -10,10 +10,6 @@ export const App = () => {
   const isLightMode = createMemo(() => themeMode.get() === "light")
   const isPpuccinMode = createMemo(() => themeMode.get() === "gooseppuccin")
 
-  const duckUrl = createMemo(() =>
-    retroMode.get() ? "duck.gif" : "duck-2.gif"
-  )
-
   return (
     <Surface maxWidth={maxWidth.get()}>
       <Surface.Main>
@@ -61,7 +57,7 @@ export const App = () => {
           </div>
         </div>
       </Surface.Main>
-      <Surface.Image src={`/assets/${duckUrl()}`} alt="" width="13rem" />
+      <Surface.Image src={retroMode.url()} alt="" width="13rem" />
     </Surface>
   )
 }
